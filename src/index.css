@@ -10,7 +10,7 @@
 }
 
 @utility page-width {
-    width: 35%;
+    width: 33%;
     max-width: 1200px;
     margin-inline: auto;
 }
