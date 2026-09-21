@@ -61,9 +61,9 @@ export default function Footer() {
   }
 
   return (
-    <footer className="z-50 px-4 pt-4 pb-16 text-slate-100 page-width">
+    <footer className="z-50 px-4 pt-40 pb-60 text-slate-100 page-width">
       <hr className="mb-4 border-t border-secondary-text" />
-      <div className="flex flex-col md:flex-row gap-8 justify-between items-start text-secondary-text">
+      <div className="flex flex-col md:flex-row gap-8 justify-between items-start text-secondary-text text-sm">
         <div className="flex flex-col gap-2 py-4 self-start">
           <p>&copy; {year} Lucas Autret</p>
         </div>
