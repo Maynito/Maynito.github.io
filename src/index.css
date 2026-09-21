@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --color-background: #0f0f0f;
+    --color-title: #FAFAFA;
+    --color-primary-text: #EDE8DC;
+    --color-secondary-text: #767676;
+}
+
+@utility page-width {
+    width: 35%;
+    max-width: 1200px;
+    margin-inline: auto;
+}
