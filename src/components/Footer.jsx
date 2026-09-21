@@ -19,12 +19,17 @@ function LangueSwitcher() {
 
   return (
     <div className="relative flex items-center">
-      <button onClick={() => setIsOpen(!isOpen)} aria-label="Choisir la langue" aria-expanded={isOpen}>
+      <button onClick={() => setIsOpen(!isOpen)} aria-label="Changer la langue" aria-expanded={isOpen} className="group relative p-2">
         <SelectedFlag className="w-5 rounded-sm" />
+        {!isOpen && (
+          <span className="pointer-events-none absolute top-full right-0 z-10 mt-2 whitespace-nowrap rounded-md bg-secondary-text/20 px-2 py-1 text-xs text-primary-text opacity-0 group-hover:opacity-100">
+            Changer la langue
+          </span>
+        )}
       </button>
 
       {isOpen && (
-        <ul className="absolute top-full left-0 mt-2 flex flex-col gap-2">
+        <ul className="absolute top-full left-2 mt-2 flex flex-col gap-2">
           {otherLangs.map((lang) => {
             const Flag = DRAPEAUX[lang];
             return (
@@ -79,8 +84,12 @@ export default function Footer() {
         </nav>
         <nav className="py-4 self-start ">
           <ul className="flex items-center space-x-4">
-            <li><button className="flex items-center gap-2" onClick={toggleDarkMode}>
+            <li><button aria-label="Mode sombre" className="group relative flex items-center gap-2 rounded-lg bg-secondary-text p-2 text-background hover:bg-primary-text"
+            onClick={toggleDarkMode}>
               <TiAdjustContrast className="w-5 h-5" />
+              <span className="pointer-events-none absolute top-full left-1/2 z-10 mt-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-secondary-text/20 px-2 py-1 text-xs text-primary-text opacity-0 group-hover:opacity-100">
+                Mode sombre
+              </span>
             </button></li>
             <li><LangueSwitcher /></li>
           </ul>
