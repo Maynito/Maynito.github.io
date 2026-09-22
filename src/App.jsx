@@ -56,7 +56,7 @@ function App() {
       <NavBar />
       <main className="page-width flex-1">
 
-        <section id="hero" className="flex-col bottom-0 z-50 flex border-t border-black/10 py-20 text-primary-text gap-6">
+        <section id="hero" className="flex-col bottom-0 z-50 flex py-20 text-primary-text gap-6">
           <h2 className="text-sm font-bold text-secondary-text">Présentation</h2>
           <p className="text-primary-text text-md leading-relaxed">
             Ceci est un exemple de contenu pour la section d'accueil.
