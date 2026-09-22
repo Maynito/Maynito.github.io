@@ -70,9 +70,9 @@ export default function Footer() {
 
         <nav className="py-4 self-start">
           <ul className="flex flex-col space-y-2 underline underline-offset-4">
-            <li><a href="#mail" className="hover:text-primary-text">Mail</a></li>
-            <li><a href="#about" className="hover:text-primary-text">LinkedIn</a></li>
-            <li><a href="#contact" className="hover:text-primary-text">Github</a></li>
+            <li><a href="mailto:lucas.autret@hotmail.com" className="hover:text-primary-text">Mail</a></li>
+            <li><a href="https://www.linkedin.com/in/lucas-autret-4814b6387/" className="hover:text-primary-text">LinkedIn</a></li>
+            <li><a href="https://github.com/Maynito" className="hover:text-primary-text">Github</a></li>
           </ul>
         </nav>
         <nav className="py-4 self-start">
