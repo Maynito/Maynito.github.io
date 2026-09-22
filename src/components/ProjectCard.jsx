@@ -3,12 +3,12 @@ import { LuArrowUpRight } from "react-icons/lu";
 export default function ProjectCard({ title, description, imageUrl, projectUrl, techs = [] }) {
   return (
     <a href={projectUrl} target="_blank" rel="noopener noreferrer" className="group block">
-      <div className="aspect-[16/10] w-full overflow-hidden rounded-xl border border-secondary-text/20 bg-secondary-text/10">
+      <div className="aspect-[16/10] w-full overflow-hidden rounded-xl border border-secondary-text/20 bg-secondary-text/10 transition-transform duration-300 group-hover:scale-[0.97]">
         {imageUrl && (
           <img
             src={imageUrl}
             alt={title}
-            className="h-full w-full object-cover transition-opacity group-hover:opacity-80"
+            className="h-full w-full object-cover object-top transition-opacity group-hover:opacity-80"
           />
         )}
       </div>
