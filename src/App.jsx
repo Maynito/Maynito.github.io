@@ -2,13 +2,15 @@ import NavBar from './components/NavBar'
 import Footer from './components/Footer'
 import ProjectCard from './components/ProjectCard'
 
+import kamas from './assets/kamas3.png'
+
 const RECENT_PROJECTS = [
   {
     title: "Kamas",
-    description: "Ceci est un exemple de description pour le projet kamas.",
-    imageUrl: "",
+    description: "Outil de suivi des prix Dofus qui repère les crafts les plus rentables.",
+    imageUrl: kamas,
     projectUrl: "https://github.com/Maynito/kamas",
-    techs: ["React", "Node.js", "MongoDB"]
+    techs: ["Python", "FastAPI", "Tesseract", "SQLite", "JavaScript"]
   },
   {
     title: "SmokeLab",
