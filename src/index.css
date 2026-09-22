@@ -5,8 +5,9 @@
 @theme {
     --color-background: #0f0f0f;
     --color-title: #FAFAFA;
-    --color-primary-text: #EDE8DC;
-    --color-secondary-text: #767676;
+    --color-primary-text: #e4e8ef;
+    --color-secondary-text: #757676;
+    --font-sans: "Inter", sans-serif;
 }
 
 @utility page-width {

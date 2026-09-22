@@ -12,7 +12,7 @@ export default function NavBar() {
   const [actif, setActif] = useState('#work');
 
   return (
-    <header className="inset-x-0 top-0 z-50 flex items-center justify-between bg-background text-primary-text page-width px-4 py-8">
+    <header className="inset-x-0 top-0 z-50 flex items-center justify-between bg-background text-primary-text page-width px-4 pt-20 pb-6">
       <nav className="flex items-center space-x-4 text-lg font-semibold">
         <img src={profile} alt="Logo" className="h-10 w-10 shrink-0 rounded-full bg-white object-contain p-0.5" />
         <ul className="flex-col items-center space-x-2">
