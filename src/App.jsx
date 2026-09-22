@@ -6,12 +6,14 @@ function App() {
     <div className="App bg-background">
       <NavBar />
       <main className="page-width">
-        <section id="hero" className="bottom-0 z-50 flex w-full items-center justify-between border-t border-black/10 p-20 text-primary-text">
-          <h2 className="text-3xl font-bold text-center text-secondary-text">Bienvenue sur mon site</h2>
-          <p className="text-center text-secondary-text mt-4">
+
+        <section id="hero" className="flex-col bottom-0 z-50 flex border-t border-black/10 p-20 text-primary-text gap-6">
+          <h2 className="text-sm font-bold text-secondary-text">Présentation</h2>
+          <p className="text-primary-text text-md leading-relaxed">
             Ceci est un exemple de contenu pour la section d'accueil.
           </p>
         </section>
+
         <div id="projets" className="mx-auto max-w-2xl space-y-6 p-8 text-lg leading-relaxed text-primary-text">
           {Array.from({ length: 12 }, (_, index) => (
             <p key={index}>
@@ -20,6 +22,7 @@ function App() {
             </p>
           ))}
         </div>
+        
       </main>
       <Footer />
     </div>
