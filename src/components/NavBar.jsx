@@ -1,16 +1,42 @@
-export default
+import { useState } from "react";
+import profile from "../assets/profile.jpg";
 
-function NavBar() {
+const LIENS = [
+  { href: "#work", label: "Work" },
+  { href: "#about", label: "About" },
+  { href: "#contact", label: "Contact" },
+];
+
+export default function NavBar() {
+
+  const [actif, setActif] = useState('#work');
+
   return (
-    <header className="fixed  top-0 z-50 flex w-full items-center justify-between border-b border-slate-700/60 bg-slate-950/10 p-4 text-slate-100 backdrop-blur-md">
+    <header className="inset-x-0 top-0 z-50 flex items-center justify-between bg-background text-primary-text page-width px-4 py-8">
       <nav className="flex items-center space-x-4 text-lg font-semibold">
-        <a href="#home" className="text-lg font-semibold hover:text-main-text">Lucas Autret</a>
+        <img src={profile} alt="Logo" className="h-10 w-10 shrink-0 rounded-full bg-white object-contain p-0.5" />
+        <ul className="flex-col items-center space-x-2">
+          <li>
+            <a href="#home" className="text-lg font-semibold hover:text-primary-text">Lucas Autret</a>
+          </li>
+          <li className="text-sm font-normal text-secondary-text">
+            <a className="hover:text-primary-text">Software Engineer</a>
+          </li>
+        </ul>
       </nav>
       <nav>
-        <ul className="flex space-x-4">
-          <li><a href="#home" className="hover:text-main-text">Home</a></li>
-          <li><a href="#about" className="hover:text-main-text">About</a></li>
-          <li><a href="#contact" className="hover:text-main-text">Contact</a></li>
+        <ul className="flex space-x-2">
+          {LIENS.map((lien) => (
+            <li key={lien.href}>
+              <a
+                href={lien.href}
+                className={`rounded-3xl px-3 py-2 hover:text-primary-text ${actif === lien.href ? 'bg-secondary-text/20 text-primary-text' : ''}`}
+                onClick={() => setActif(lien.href)}
+              >
+                {lien.label}
+              </a>
+            </li>
+          ))}
         </ul>
       </nav>
     </header>
