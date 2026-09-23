@@ -24,7 +24,7 @@ const RECENT_PROJECTS = [
     description: "Ceci est un exemple de description pour le projet portfolio.",
     imageUrl: "",
     projectUrl: "https://labs.sogeti.com/project/fedia/",
-    techs: ["React", "Tailwind CSS"]
+    techs: ["C#", ".NET", "SolidJS"]
   }
 ];
 
@@ -61,7 +61,8 @@ function App() {
         <section id="hero" className="flex-col bottom-0 z-50 flex py-20 text-primary-text gap-6">
           <h2 className="text-sm font-bold text-secondary-text">Présentation</h2>
           <p className="text-primary-text text-md leading-relaxed">
-            Ceci est un exemple de contenu pour la section d'accueil.
+            Développeur full-stack diplômé du Master Génie Logiciel de l’Université de Bordeaux, avec 6 mois d’expérience chez Capgemini sur une 
+            application web de santé en C#/.NET et SolidJS/TypeScript. Je recherche un CDI, disponible dès octobre 2026.
           </p>
         </section>
 
