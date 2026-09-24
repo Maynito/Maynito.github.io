@@ -2,6 +2,7 @@ import { TiAdjustContrast } from "react-icons/ti"
 import { FR, GB } from 'country-flag-icons/react/3x2'
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const DRAPEAUX = { fr: FR, gb: GB };
 
@@ -74,9 +75,9 @@ export default function Footer() {
         </nav>
         <nav className="py-4 self-start">
           <ul className="flex flex-col space-y-2 underline underline-offset-4">
-            <li><a href="#work" className="hover:text-primary-text">Work</a></li>
-            <li><a href="#about" className="hover:text-primary-text">About</a></li>
-            <li><a href="#contact" className="hover:text-primary-text">Contact</a></li>
+            <li><Link to="/" className="hover:text-primary-text">Work</Link></li>
+            <li><Link to="/about" className="hover:text-primary-text">About</Link></li>
+            <li><Link to="/contact" className="hover:text-primary-text">Contact</Link></li>
           </ul>
         </nav>
         <nav className="py-4 self-start ">
