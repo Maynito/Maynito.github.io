@@ -1,51 +1,7 @@
 import { TiAdjustContrast } from "react-icons/ti"
-import { FR, GB } from 'country-flag-icons/react/3x2'
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
-const DRAPEAUX = { fr: FR, gb: GB };
-
-function LangueSwitcher() {
-  const [selectedLang, setSelectedLang] = useState('fr');
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleLangChange = (lang) => {
-    setSelectedLang(lang);
-    setIsOpen(false);
-  };
-
-  const SelectedFlag = DRAPEAUX[selectedLang];
-  const otherLangs = Object.keys(DRAPEAUX).filter((lang) => lang !== selectedLang);
-
-  return (
-    <div className="relative flex items-center">
-      <button onClick={() => setIsOpen(!isOpen)} aria-label="Changer la langue" aria-expanded={isOpen} className="group relative p-2">
-        <SelectedFlag className="w-5 rounded-sm" />
-        {!isOpen && (
-          <span className="pointer-events-none absolute top-full right-0 z-10 mt-2 whitespace-nowrap rounded-md bg-secondary-text/20 px-2 py-1 text-xs text-primary-text opacity-0 group-hover:opacity-100">
-            Changer la langue
-          </span>
-        )}
-      </button>
-
-      {isOpen && (
-        <ul className="absolute top-full left-2 mt-2 flex flex-col gap-2">
-          {otherLangs.map((lang) => {
-            const Flag = DRAPEAUX[lang];
-            return (
-              <li key={lang}>
-                <button onClick={() => handleLangChange(lang)} aria-label={lang}>
-                  <Flag className="w-5 rounded-sm" />
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-      )}
-    </div>
-  );
-}
 
 export default function Footer() {
     const year = new Date().getFullYear();
@@ -89,7 +45,6 @@ export default function Footer() {
                 {themeLabel}
               </span>
             </button></li>
-            <li><LangueSwitcher /></li>
           </ul>
         </nav>
       </div>
