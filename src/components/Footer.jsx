@@ -10,6 +10,12 @@ export default function Footer() {
   function toggleTheme() {
     document.documentElement.classList.toggle('light');
     setIsLightMode(!isLightMode);
+
+    // La barre d'adresse du navigateur mobile suit la couleur de fond du thème
+    const couleurFond = getComputedStyle(document.documentElement)
+      .getPropertyValue('--color-background')
+      .trim();
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', couleurFond);
   }
 
   const themeLabel = isLightMode ? "Mode clair" : "Mode sombre";
