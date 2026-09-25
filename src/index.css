@@ -10,6 +10,10 @@
     --font-sans: "Inter", sans-serif;
 }
 
+body {
+    background-color: var(--color-background);
+}
+
 @utility page-width {
     width: 90%;
     max-width: 840px;
