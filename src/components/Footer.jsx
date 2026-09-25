@@ -15,7 +15,7 @@ export default function Footer() {
   const themeLabel = isLightMode ? "Mode clair" : "Mode sombre";
 
   return (
-    <footer className="z-50 px-4 pt-40 pb-60 text-secondary-text page-width">
+    <footer className="z-50 px-4 pt-20 pb-24 sm:pt-40 sm:pb-60 text-secondary-text page-width">
       <hr className="mb-4 border-t border-secondary-text" />
       <div className="flex flex-col md:flex-row gap-8 justify-between items-start text-secondary-text text-sm">
         <div className="flex flex-col gap-2 py-4 self-start">

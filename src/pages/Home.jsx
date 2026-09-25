@@ -53,7 +53,7 @@ const PREVIOUS_PROJECTS = [
 export default function Home() {
   return (
     <>
-      <section id="hero" className="flex-col flex py-20 text-primary-text gap-6">
+      <section id="hero" className="flex-col flex py-12 sm:py-20 text-primary-text gap-6">
         <h2 className="text-sm font-bold text-secondary-text">Présentation</h2>
         <p className="text-primary-text text-md leading-relaxed">
           Développeur full-stack diplômé du Master Génie Logiciel de l’Université de Bordeaux, avec 6 mois d’expérience chez Capgemini sur une

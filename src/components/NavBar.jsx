@@ -69,7 +69,7 @@ function MailButton() {
 export default function NavBar() {
 
   return (
-    <header className="inset-x-0 top-0 z-50 flex items-center justify-between bg-background text-primary-text page-width px-4 pt-20 pb-6">
+    <header className="inset-x-0 top-0 z-50 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between bg-background text-primary-text page-width px-4 pt-10 pb-6 sm:pt-20">
       <nav className="flex items-center space-x-4 text-lg font-semibold">
         <img src={profile} alt="Logo" className="h-10 w-10 shrink-0 rounded-full bg-white object-contain p-0.5" />
         <ul className="flex-col items-center space-x-2">
@@ -81,7 +81,7 @@ export default function NavBar() {
           </li>
         </ul>
       </nav>
-      <div className="flex items-center gap-3">
+      <div className="flex items-center justify-between gap-3 sm:justify-end">
         <nav>
           <ul className="flex space-x-2 border-r border-secondary-text/20 pr-3">
             {LIENS.map((lien) => (
