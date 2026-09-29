@@ -15,7 +15,7 @@ const RECENT_PROJECTS = [
     description: "Outil de visualisation et de stratégie pour le jeu Counter-Strike 2.",
     imageUrl: "",
     projectUrl: "https://github.com/Maynito/smokelab",
-    techs: ["React", "Tailwind CSS"]
+    techs: ["React", "TypeScript", "Tailwind CSS", "Supabase", "Steam Auth"]
   },
   {
     title: "FedIA",
@@ -29,24 +29,24 @@ const RECENT_PROJECTS = [
 const PREVIOUS_PROJECTS = [
   {
     title: "TaskForge",
-    description: "Outil de gestion de tâches pour les développeurs.",
+    description: "Plateforme de gestion de projet agile : sprints, Kanban, authentification JWT.",
     imageUrl: "",
     projectUrl: "https://github.com/Maynito/TaskForge",
-    techs: ["React", "Tailwind CSS"]
+    techs: ["Angular", "TypeScript", "Spring Boot", "PostgreSQL", "Docker", "Swagger / OpenAPI", "JWT"]
   },
   {
     title: "Paint App",
     description: "Application de formes géométriques.",
     imageUrl: "",
     projectUrl: "https://github.com/Maynito/smokelab",
-    techs: ["React", "Tailwind CSS"]
+    techs: ["Java (apprentissage Design Patterns)"]
   },
   {
     title: "Programmation Large Échelle",
-    description: "Projet d'analyse et de traitement de données à grande échelle sur des données Clash Royale.",
+    description: "Traitement distribué de données Clash Royale avec MapReduce sur cluster Hadoop.",
     imageUrl: "",
     projectUrl: "https://github.com/Decymax/ProjetPLE",
-    techs: ["React", "Tailwind CSS"]
+    techs: ["Java", "Python", "Hadoop", "MapReduce", "HDFS"]
   }
 ];
 
