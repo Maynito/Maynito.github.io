@@ -7,7 +7,7 @@ const RECENT_PROJECTS = [
     title: "Kamas",
     description: "Outil de suivi des prix Dofus qui repère les crafts les plus rentables.",
     imageUrl: kamas,
-    projectUrl: "https://github.com/Maynito/kamas",
+    projectUrl: "/kamas",
     techs: ["Python", "FastAPI", "Tesseract", "SQLite", "JavaScript"]
   },
   {

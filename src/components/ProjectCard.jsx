@@ -1,8 +1,15 @@
+import { Link } from "react-router-dom";
 import { LuArrowUpRight } from "react-icons/lu";
 
 export default function ProjectCard({ title, description, imageUrl, projectUrl, techs = [] }) {
+  const isInternal = projectUrl.startsWith("/") && !projectUrl.startsWith("//");
+  const Wrapper = isInternal ? Link : "a";
+  const linkProps = isInternal
+    ? { to: projectUrl }
+    : { href: projectUrl, target: "_blank", rel: "noopener noreferrer" };
+
   return (
-    <a href={projectUrl} target="_blank" rel="noopener noreferrer" className="group block">
+    <Wrapper {...linkProps} className="group block">
       <div className="aspect-[16/10] w-full overflow-hidden rounded-xl border border-secondary-text/20 bg-secondary-text/10 transition-transform duration-300 group-hover:scale-[0.97]">
         {imageUrl && (
           <img
@@ -23,6 +30,6 @@ export default function ProjectCard({ title, description, imageUrl, projectUrl, 
         </div>
         <LuArrowUpRight className="mt-0.5 size-4 shrink-0 text-secondary-text group-hover:text-primary-text" />
       </div>
-    </a>
+    </Wrapper>
   );
 }
