@@ -15,9 +15,9 @@ const EXPERIENCES = [
 ];
 
 const OUTILS = [
-  "Python", "FastAPI", "C#", ".NET", "TypeScript", "JavaScript",
-  "React", "Angular", "SolidJS", "Java", "Tailwind CSS", "SQLite",
-  "PostgreSQL", "Git", "Docker", "VS Code",
+  "Python", "C#", ".NET", "TypeScript", "JavaScript",
+  "React", "Angular", "SolidJS", "Java", "SQLite",
+  "PostgreSQL", "Git", "Docker",
 ];
 
 export default function About() {
