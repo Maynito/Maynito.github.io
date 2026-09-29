@@ -38,7 +38,7 @@ const PREVIOUS_PROJECTS = [
     title: "Paint App",
     description: "Application de formes géométriques.",
     imageUrl: "",
-    projectUrl: "https://github.com/Maynito/smokelab",
+    projectUrl: "https://github.com/Maynito/projet-paint",
     techs: ["Java (apprentissage Design Patterns)"]
   },
   {
