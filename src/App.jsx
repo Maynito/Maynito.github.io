@@ -7,10 +7,12 @@ import About from './pages/About'
 import Contact from './pages/Contact'
 import Kamas from './pages/Kamas'
 import NotFound from './pages/NotFound'
+import ScrollToTop from './components/ScrollToTop'
 
 function App() {
   return (
     <HashRouter>
+      <ScrollToTop />
       <div className="App bg-background min-h-screen flex flex-col">
         <NavBar />
         <main className="page-width flex-1">
