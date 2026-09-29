@@ -1,6 +1,6 @@
 import ProjectCard from '../components/ProjectCard'
 
-import kamas from '../assets/kamas3.png'
+import kamas from '../assets/kamas-hdv-merge.png'
 
 const RECENT_PROJECTS = [
   {
