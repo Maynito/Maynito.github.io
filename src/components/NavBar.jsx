@@ -77,7 +77,7 @@ export default function NavBar() {
             <Link to="/" className="text-lg font-semibold hover:text-primary-text">Lucas Autret</Link>
           </li>
           <li className="text-sm font-normal text-secondary-text">
-            <a className="hover:text-primary-text">Software Engineer</a>
+            <a className="hover:text-primary-text">Développeur full-stack</a>
           </li>
         </ul>
       </nav>
