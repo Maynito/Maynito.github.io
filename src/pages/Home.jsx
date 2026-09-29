@@ -12,14 +12,14 @@ const RECENT_PROJECTS = [
   },
   {
     title: "SmokeLab",
-    description: "Ceci est un exemple de description pour le projet portfolio.",
+    description: "Outil de visualisation et de stratégie pour le jeu Counter-Strike 2.",
     imageUrl: "",
     projectUrl: "https://github.com/Maynito/smokelab",
     techs: ["React", "Tailwind CSS"]
   },
   {
     title: "FedIA",
-    description: "Ceci est un exemple de description pour le projet portfolio.",
+    description: "Plateforme d'analyse de radiographies médicales.",
     imageUrl: "",
     projectUrl: "https://labs.sogeti.com/project/fedia/",
     techs: ["C#", ".NET", "SolidJS"]
@@ -29,21 +29,21 @@ const RECENT_PROJECTS = [
 const PREVIOUS_PROJECTS = [
   {
     title: "TaskForge",
-    description: "Ceci est un exemple de description pour le projet portfolio.",
+    description: "Outil de gestion de tâches pour les développeurs.",
     imageUrl: "",
     projectUrl: "https://github.com/Maynito/TaskForge",
     techs: ["React", "Tailwind CSS"]
   },
   {
     title: "Paint App",
-    description: "Ceci est un exemple de description pour le projet portfolio.",
+    description: "Application de formes géométriques.",
     imageUrl: "",
     projectUrl: "https://github.com/Maynito/smokelab",
     techs: ["React", "Tailwind CSS"]
   },
   {
     title: "Programmation Large Échelle",
-    description: "Ceci est un exemple de description pour le projet portfolio.",
+    description: "Projet d'analyse et de traitement de données à grande échelle sur des données Clash Royale.",
     imageUrl: "",
     projectUrl: "https://github.com/Decymax/ProjetPLE",
     techs: ["React", "Tailwind CSS"]
