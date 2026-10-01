@@ -78,6 +78,28 @@
   --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
   --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
 
+  /* Échelle de la mise en page (valeurs fluides) */
+  --text-name: clamp(4.5rem, 1rem + 10vw, 10rem);
+  --text-name--line-height: 0.88;  --text-name--letter-spacing: -0.05em;  --text-name--font-weight: 600;
+  --text-case-title: clamp(3.5rem, 1rem + 8vw, 8.5rem);
+  --text-case-title--line-height: 0.9;  --text-case-title--letter-spacing: -0.05em;  --text-case-title--font-weight: 600;
+  --text-cta: clamp(2.5rem, 1rem + 5.4vw, 6rem);
+  --text-cta--line-height: 0.98;  --text-cta--letter-spacing: -0.045em;  --text-cta--font-weight: 600;
+  --text-h2: clamp(2rem, 1.25rem + 3vw, 3.5rem);
+  --text-h2--line-height: 1.02;  --text-h2--letter-spacing: -0.035em;  --text-h2--font-weight: 600;
+  --text-project: clamp(1.75rem, 1.25rem + 1.5vw, 2.5rem);
+  --text-project--line-height: 1.08;  --text-project--letter-spacing: -0.03em;  --text-project--font-weight: 600;
+  --text-prose-h2: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  --text-prose-h2--line-height: 1.15;  --text-prose-h2--letter-spacing: -0.025em;  --text-prose-h2--font-weight: 600;
+  --text-row: clamp(1.25rem, 1rem + 0.6vw, 1.5rem);
+  --text-row--line-height: 1.875rem;  --text-row--letter-spacing: -0.02em;  --text-row--font-weight: 600;
+  --text-lede: clamp(1.125rem, 1rem + 0.4vw, 1.25rem);
+  --text-lede--line-height: 1.6;
+  --text-chapo: clamp(1.25rem, 1rem + 0.6vw, 1.5rem);
+  --text-chapo--line-height: 1.45;  --text-chapo--letter-spacing: -0.01em;
+  --text-article: clamp(1.0625rem, 1rem + 0.2vw, 1.125rem);
+  --text-article--line-height: 1.7;
+
   /* Animations : animate-enter, animate-page, animate-draw, animate-halo */
   --animate-enter: enter 560ms var(--ease-out-quint) both;
   --animate-page: page 240ms var(--ease-out-quint) both;
@@ -105,11 +127,57 @@
   &:hover::after, &:focus-visible::after { transform: scaleX(1); transform-origin: left; }
 }
 
-@utility page-width {
-  width: 90%;
-  max-width: 840px;
-  margin-inline: auto;
+/* ---------- Grille de 12 colonnes ---------- */
+:root {
+  --page-margin: clamp(1.25rem, 4vw, 2.5rem);
+  --gutter: 1rem;
+  --cols: 4;
+  --site: min(75rem, 100vw - 2 * var(--page-margin));
+  --bleed: calc((100vw - var(--site)) / 2);   /* bord du conteneur → bord de l'écran */
+  --section-y: clamp(6rem, 4rem + 8vw, 12rem);
+  --hdr: 56px;
 }
+@media (width >= 40rem) { :root { --gutter: 1.25rem; --cols: 8; } }
+@media (width >= 64rem) { :root { --cols: 12; } }
+@media (width >= 80rem) { :root { --gutter: 1.5rem; } }
+
+/* 100vw inclut la barre de défilement sous Windows : on coupe le débordement */
+body { overflow-x: clip; }
+
+@utility site { width: var(--site); margin-inline: auto; }
+@utility grid-site {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  column-gap: var(--gutter);
+}
+@utility bleed-r { margin-right: calc(-1 * var(--bleed)); }
+@utility bleed-l { margin-left: calc(-1 * var(--bleed)); }
+@utility bleed-x { margin-inline: calc(-1 * var(--bleed)); }
+@utility py-section { padding-block: var(--section-y); }
+@utility pt-section { padding-top: var(--section-y); }
+@utility mt-section { margin-top: var(--section-y); }
+
+/* Conservé le temps de la migration : même largeur que .site */
+@utility page-width { width: var(--site); margin-inline: auto; }
+
+/* Décalage de « Autret » : 1 colonne en 4 colonnes, 2 au-delà */
+@utility name-offset {
+  --off: 1;
+  padding-left: calc((100% + var(--gutter)) / var(--cols) * var(--off));
+  @media (width >= 40rem) { --off: 2; }
+}
+
+/* Libellé mono réutilisé partout */
+@utility label {
+  font: 500 12px/16px var(--font-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Tracé des colonnes du hero */
+@keyframes grid-draw { from { transform: scaleY(0); } }
+@media (prefers-reduced-motion: reduce) { .gridlines > * { animation: none !important; } }
 
 @layer base {
   html { background: var(--bg); color: var(--text); font-feature-settings: "cv11", "ss01"; }
@@ -117,6 +185,35 @@
   :focus-visible { outline: 2px solid var(--galaxy); outline-offset: 3px; }
   ::selection { background: var(--galaxy-subtle); }
   .prose a { --underline: var(--galaxy); text-decoration: underline 1px var(--border-strong); text-underline-offset: 4px; }
+}
+
+@layer components {
+  /* Boutons : pilule de 44px de haut */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    height: 44px; padding-inline: 1.25rem; border-radius: 999px;
+    border: 1px solid var(--border); color: var(--text);
+    font-size: 0.875rem; font-weight: 500;
+    transition: background-color 160ms var(--ease-out-quint), border-color 160ms var(--ease-out-quint), color 160ms var(--ease-out-quint);
+  }
+  .btn:hover { background: var(--surface-hover); border-color: var(--border-strong); color: var(--heading); }
+  .btn-primary { background: var(--heading); border-color: var(--heading); color: var(--bg); }
+  .btn-primary:hover { background: var(--heading); opacity: 0.9; color: var(--bg); }
+  @media (prefers-reduced-motion: no-preference) {
+    .btn:active { scale: 0.97; }
+  }
+
+  /* Corps d'une étude de cas */
+  .prose-cs h2 {
+    font-size: var(--text-prose-h2); line-height: var(--text-prose-h2--line-height);
+    letter-spacing: var(--text-prose-h2--letter-spacing); font-weight: 600; color: var(--heading);
+    margin-top: clamp(3.5rem, 6vw, 5rem); margin-bottom: 1.25rem; scroll-margin-top: 96px;
+  }
+  .prose-cs p { font-size: var(--text-article); line-height: var(--text-article--line-height); max-width: 40em; margin-bottom: 1.25rem; }
+  .prose-cs code {
+    font-family: var(--font-mono); font-size: 0.9em;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 0.1em 0.35em;
+  }
 }
 
 /* ---------- Apparition au défilement ---------- */

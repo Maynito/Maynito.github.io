@@ -1,69 +1,20 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { LuMail, LuCopy, LuCheck } from "react-icons/lu";
-import profile from "../assets/profile.jpg";
+
 import CommandPalette from "./CommandPalette";
 
 const LIENS = [
-  { to: "/", label: "Work" },
-  { to: "/about", label: "About" },
+  { to: "/", label: "Projets" },
+  { to: "/about", label: "Parcours" },
   { to: "/contact", label: "Contact" },
 ];
 
-const EMAIL = "lucas.autret@hotmail.com";
-
-function MailButton() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isCopied, setIsCopied] = useState(false);
-  const containerRef = useRef(null);
-
-  useEffect(() => {
-    if (!isOpen) return;
-
-    function handleClickOutside(event) {
-      if (!containerRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isOpen]);
-
-  async function copyEmail() {
-    try {
-      await navigator.clipboard.writeText(EMAIL);
-      setIsCopied(true);
-      setTimeout(() => setIsCopied(false), 2000);
-    } catch {
-      setIsCopied(false);
-    }
-  }
-
+export function Dot() {
   return (
-    <div className="relative" ref={containerRef}>
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        aria-label="Afficher mon adresse mail"
-        aria-expanded={isOpen}
-        className="flex items-center rounded-3xl p-2 text-muted hover:bg-surface-hover hover:text-text"
-      >
-        <LuMail className="size-5" />
-      </button>
-
-      {isOpen && (
-        <div className="absolute top-full right-0 z-10 mt-2 flex items-center gap-3 rounded-xl border border-border bg-bg px-3 py-2">
-          <span className="text-sm whitespace-nowrap text-text">{EMAIL}</span>
-          <button
-            onClick={copyEmail}
-            aria-label="Copier l'adresse mail"
-            className="text-muted hover:text-text"
-          >
-            {isCopied ? <LuCheck className="size-4" /> : <LuCopy className="size-4" />}
-          </button>
-        </div>
-      )}
-    </div>
+    <span className="relative flex size-2" aria-hidden="true">
+      <span className="absolute inset-0 rounded-full bg-success opacity-40" />
+      <span className="relative size-2 rounded-full bg-success" />
+    </span>
   );
 }
 
@@ -72,47 +23,45 @@ export default function NavBar() {
   const estMac = typeof navigator !== "undefined" && /Mac|iPhone|iPad/.test(navigator.userAgent);
 
   return (
-    <header className="inset-x-0 top-0 z-50 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between bg-bg text-text page-width px-4 pt-10 pb-6 sm:pt-20">
-      <nav className="flex items-center space-x-4 text-lg font-semibold">
-        <img src={profile} alt="Photo de Lucas Autret" className="h-10 w-10 shrink-0 rounded-full bg-white object-contain p-0.5" />
-        <div className="flex flex-col">
-          <Link to="/" className="text-card text-heading transition-colors duration-160 hover:text-heading">Lucas Autret</Link>
-          <span className="text-caption font-normal text-muted">Développeur full-stack</span>
-        </div>
-      </nav>
-      <div className="flex items-center justify-between gap-3 sm:justify-end">
-        <nav>
-          <ul className="flex space-x-2 border-r border-border pr-3">
-            {LIENS.map((lien) => (
-              <li key={lien.to}>
-                <NavLink
-                  to={lien.to}
-                  className={({ isActive }) =>
-                    `inline-flex h-10 items-center rounded-full px-3 text-body-sm transition-colors duration-160 ease-out-quint hover:bg-surface-hover hover:text-heading motion-safe:active:scale-[0.97] ${
-                      isActive ? 'bg-surface-hover text-heading' : 'text-muted'
-                    }`
-                  }
-                >
-                  {lien.label}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
+    <header className="sticky top-0 z-20 h-14 border-b border-border bg-bg/85 backdrop-blur-md">
+      <div className="site flex h-full items-center gap-6">
+        <Link to="/" className="mr-auto text-[15px] font-semibold tracking-[-0.01em] text-heading">
+          Lucas Autret
+        </Link>
+
+        <nav aria-label="Principale" className="flex gap-5 text-sm text-muted">
+          {LIENS.map((lien) => (
+            <NavLink
+              key={lien.to}
+              to={lien.to}
+              end={lien.to === "/"}
+              className={({ isActive }) =>
+                `transition-colors duration-160 hover:text-heading ${
+                  isActive ? "text-heading underline decoration-1 underline-offset-[6px]" : ""
+                }`
+              }
+            >
+              {lien.label}
+            </NavLink>
+          ))}
         </nav>
 
-        {/* Indice de la palette de commandes, masqué sur écran tactile */}
-        <button
-          type="button"
-          onClick={() => ouvrirPalette.current?.()}
-          aria-label="Ouvrir la palette de commandes"
-          className="hidden rounded-md border border-border bg-surface px-2 py-1 font-mono text-xs text-muted transition-colors duration-160 hover:bg-surface-hover hover:text-heading [@media(hover:hover)]:inline-block"
-        >
-          {estMac ? "⌘K" : "Ctrl K"}
-        </button>
-
-        <MailButton />
-        <CommandPalette ouvrirRef={ouvrirPalette} />
+        <div className="hidden items-center gap-4 font-mono text-xs text-muted lg:flex">
+          <span className="flex items-center gap-2">
+            <Dot /> Dispo. oct. 2026
+          </span>
+          <button
+            type="button"
+            onClick={() => ouvrirPalette.current?.()}
+            aria-label="Ouvrir la palette de commandes"
+            className="rounded-md border border-border bg-surface px-1.5 py-1 transition-colors duration-160 hover:text-heading"
+          >
+            {estMac ? "⌘K" : "Ctrl K"}
+          </button>
+        </div>
       </div>
+
+      <CommandPalette ouvrirRef={ouvrirPalette} />
     </header>
   );
 }

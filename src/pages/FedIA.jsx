@@ -1,174 +1,129 @@
-// TODO Lucas : tous les textes de cette page sont des placeholders à remplir — ne pas publier en l'état
-// Rappel : projet réalisé en entreprise. Vérifier ce qui peut être publié avant mise en ligne
-// (pas de nom de client, pas de données patients, pas de détail interne).
+// TODO Lucas : tous les textes marqués [À compléter] sont des placeholders.
+// FedIA a été réalisé chez Capgemini : vérifie ce que tu as le droit de publier
+// avant de détailler quoi que ce soit (reste au niveau de ce qui est public sur
+// labs.sogeti.com, pas de nom de client, pas de donnée patient, pas d'archi interne).
+import ArchSchematic from "../components/ArchSchematic";
+import CaseStudy, { Adr, Figure, Placeholder, QualityTable } from "../components/CaseStudy";
+import { bySlug } from "../data/projects";
 
-import { LuArrowUpRight, LuCode, LuServer, LuTestTube } from "react-icons/lu";
-import Reveal from "../components/Reveal";
+const projet = bySlug("fedia");
 
-const STACK = [
-  "C#", ".NET", "SolidJS", "TypeScript",
-  // TODO Lucas : compléter / corriger la stack réellement utilisée
+const SECTIONS = [
+  { id: "contexte", titre: "Contexte" },
+  { id: "construit", titre: "Ce que j'ai fait" },
+  { id: "architecture", titre: "Architecture" },
+  { id: "decisions", titre: "Décisions techniques" },
+  { id: "qualite", titre: "Qualité & déploiement" },
+  { id: "bilan", titre: "Bilan" },
 ];
 
-// TODO Lucas : remplacer chaque valeur par la réalité du projet
-const CONTEXTE = [
-  { label: "Cadre", valeur: "[À compléter] Stage / alternance de 6 mois chez Capgemini" },
-  { label: "Durée", valeur: "[À compléter] 6 mois" },
-  { label: "Rôle", valeur: "[À compléter] Développeur full-stack au sein d'une équipe de N personnes" },
+const META = [
+  ["Rôle", "Développeur full-stack"],
+  ["Contexte", "Capgemini — équipe produit"],
+  ["Durée", "6 mois"],
+  ["Stack", "C# · .NET · SolidJS · TypeScript"],
 ];
 
-// TODO Lucas : décrire 3 à 5 contributions concrètes et vérifiables (verbe d'action + résultat)
-const CONTRIBUTIONS = [
-  {
-    icon: LuCode,
-    titre: "[À compléter] Interface",
-    detail:
-      "[À compléter] Décrire une contribution côté front SolidJS/TypeScript : écran développé, composant, interaction.",
-  },
-  {
-    icon: LuServer,
-    titre: "[À compléter] Back-end",
-    detail:
-      "[À compléter] Décrire une contribution côté API C#/.NET : endpoint, service, traitement de données.",
-  },
-  {
-    icon: LuTestTube,
-    titre: "[À compléter] Fiabilité",
-    detail:
-      "[À compléter] Décrire une contribution liée à la qualité : tests, correction de bug, refactoring.",
-  },
-];
-
-// TODO Lucas : ne garder que les pratiques réellement en place sur le projet
 const QUALITE = [
-  { label: "Tests", valeur: "[À compléter] Type de tests écrits et outils utilisés." },
-  { label: "Intégration continue", valeur: "[À compléter] Pipeline CI et étapes automatisées." },
-  { label: "Conteneurisation", valeur: "[À compléter] Usage de Docker en développement et/ou au déploiement." },
-];
-
-// TODO Lucas : remplacer ces emplacements par de vraies captures si la publication est autorisée,
-// sinon supprimer complètement le bloc "Aperçu".
-const APERCUS = [
-  "Capture à ajouter",
-  "Capture à ajouter",
-  "Capture à ajouter",
+  ["Tests", "[À compléter] types de tests écrits et outils utilisés."],
+  ["Intégration continue", "[À compléter] chaîne de build et de vérification."],
+  ["Déploiement", "[À compléter] environnement et procédure de mise en production."],
 ];
 
 export default function FedIA() {
   return (
-    <section id="fedia" className="space-y-16 py-12 sm:py-20 text-text">
+    <CaseStudy
+      project={projet}
+      chapo="[À compléter] Une à deux phrases : à qui s'adresse FedIA, quel problème la plateforme résout, et ce que la solution apporte."
+      meta={META}
+      sections={SECTIONS}
+    >
+      <h2 id="contexte">
+        <small className="label mb-2 block">01</small>
+        Contexte
+      </h2>
+      <p>
+        [À compléter] Qui utilise la plateforme, quel problème elle traite, pourquoi l&apos;existant
+        ne suffisait pas. Reste au niveau de ce qui est déjà public sur{" "}
+        <a href="https://labs.sogeti.com/project/fedia/" target="_blank" rel="noopener noreferrer">
+          labs.sogeti.com
+        </a>
+        .
+      </p>
 
-      <div className="space-y-6">
-        <p className="text-label text-muted uppercase">Étude de cas</p>
-        <h1 className="text-page-sm sm:text-page text-heading">
-          FedIA — analyse de radiographies médicales
-        </h1>
-        <p className="max-w-2xl font-mono text-xs text-muted">
-          {STACK.join(" · ")}
-        </p>
+      <h2 id="construit">
+        <small className="label mb-2 block">02</small>
+        Ce que j&apos;ai fait
+      </h2>
+      <p>
+        [À compléter] Tes contributions concrètes, en compétences et en technologies : écrans
+        développés côté SolidJS, services .NET, sujets transverses (tests, revues de code, suivi des
+        demandes).
+      </p>
+
+      <Figure num={2} wide caption="[À compléter] légende de la capture">
+        <Placeholder />
+      </Figure>
+
+      <h2 id="architecture">
+        <small className="label mb-2 block">03</small>
+        Architecture
+      </h2>
+      <p>
+        [À compléter] Une phrase par flèche du schéma : ce que fait chaque couche et pourquoi elle
+        est séparée des autres. Corrige les couches dans <code>projects.js</code> si elles ne
+        correspondent pas.
+      </p>
+
+      <Figure num={3} wide caption="Architecture, générée depuis projects.js">
+        <ArchSchematic project={projet} W={1000} H={400} />
+      </Figure>
+
+      <h2 id="decisions">
+        <small className="label mb-2 block">04</small>
+        Décisions techniques
+      </h2>
+      <div className="mt-6 grid gap-4">
+        <Adr
+          titre="[À compléter] une décision marquante"
+          contexte="[À compléter] la contrainte de départ."
+          decision="[À compléter] ce qui a été choisi."
+          compromis="[À compléter] ce que ce choix a coûté."
+        />
+        <Adr
+          titre="[À compléter] une deuxième décision"
+          contexte="[À compléter]"
+          decision="[À compléter]"
+          compromis="[À compléter]"
+        />
       </div>
 
-      <div className="space-y-6">
-        <Reveal as="h2" className="text-section text-heading">Aperçu</Reveal>
-        <ul className="grid gap-4 sm:grid-cols-3">
-          {APERCUS.map((legende, index) => (
-            <li
-              key={`apercu-${index}`}
-              className="flex aspect-[16/10] items-center justify-center rounded-xl border border-dashed border-border"
-            >
-              <p className="text-xs text-muted">{legende}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <h2 id="qualite">
+        <small className="label mb-2 block">05</small>
+        Qualité &amp; déploiement
+      </h2>
+      <QualityTable rows={QUALITE} />
 
-      <div className="space-y-6">
-        <Reveal as="h2" className="text-section text-heading">Contexte &amp; rôle</Reveal>
-        <p className="max-w-[60ch] text-body text-muted">
-          [À compléter] Résumer en deux phrases le cadre de la mission, l&apos;équipe dans laquelle
-          le projet a été mené et la place occupée dans cette équipe.
-        </p>
-
-        <ul className="grid gap-4 sm:grid-cols-3">
-          {CONTEXTE.map((item) => (
-            <li key={item.label} className="space-y-2 rounded-xl border border-border p-4">
-              <p className="text-heading">{item.label}</p>
-              <p className="text-body-sm text-muted">{item.valeur}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="space-y-4">
-        <Reveal as="h2" className="text-section text-heading">Le projet</Reveal>
-        <div className="max-w-2xl space-y-4 leading-relaxed">
-          <p>
-            [À compléter] <span className="text-heading">Le problème</span> : expliquer le besoin
-            auquel la plateforme répond, en restant au niveau du domaine (analyse de
-            radiographies médicales) et sans détail confidentiel.
-          </p>
-          <p>
-            [À compléter] <span className="text-heading">La solution</span> : décrire ce que fait la
-            plateforme, les grandes briques et ce qu&apos;elle apporte à ses utilisateurs.
-          </p>
-          <p>
-            [À compléter] Préciser éventuellement les contraintes techniques marquantes du projet
-            (volumétrie, performance, compatibilité) sans exposer d&apos;information interne.
-          </p>
+      <h2 id="bilan">
+        <small className="label mb-2 block">06</small>
+        Bilan
+      </h2>
+      <div className="mt-6 grid gap-8 sm:grid-cols-2">
+        <div>
+          <p className="label mb-3">Ce que j&apos;en retire</p>
+          <ul className="list-disc space-y-2 pl-5 text-sm leading-[22px] text-text">
+            <li>[À compléter]</li>
+            <li>[À compléter]</li>
+          </ul>
+        </div>
+        <div>
+          <p className="label mb-3">Ce que je referais autrement</p>
+          <ul className="list-disc space-y-2 pl-5 text-sm leading-[22px] text-text">
+            <li>[À compléter]</li>
+            <li>[À compléter]</li>
+          </ul>
         </div>
       </div>
-
-      <div className="space-y-6">
-        <Reveal as="h2" className="text-section text-heading">Ce que j&apos;ai fait</Reveal>
-        <p className="max-w-[60ch] text-body text-muted">
-          [À compléter] Introduire en une phrase le périmètre confié et la façon de travailler de
-          l&apos;équipe.
-        </p>
-
-        <ul className="grid gap-4 sm:grid-cols-3">
-          {CONTRIBUTIONS.map((item) => (
-            <li key={item.titre} className="space-y-2 rounded-xl border border-border p-4">
-              <item.icon className="size-5 text-muted" />
-              <p className="text-heading">{item.titre}</p>
-              <p className="text-body-sm text-muted">{item.detail}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="space-y-6">
-        <Reveal as="h2" className="text-section text-heading">Qualité &amp; déploiement</Reveal>
-        <p className="max-w-[60ch] text-body text-muted">
-          [À compléter] Résumer en une phrase la façon dont la qualité était assurée et comment le
-          projet était livré.
-        </p>
-
-        <ul className="max-w-2xl divide-y divide-border rounded-xl border border-border">
-          {QUALITE.map((item) => (
-            <li key={item.label} className="space-y-1 p-4">
-              <p className="text-heading">{item.label}</p>
-              <p className="text-body-sm text-muted">{item.valeur}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="space-y-4">
-        <Reveal as="h2" className="text-section text-heading">En savoir plus</Reveal>
-        <p className="max-w-[60ch] text-body text-muted">
-          Le projet est présenté publiquement sur le site de Sogeti Labs.
-        </p>
-        <a
-          href="https://labs.sogeti.com/project/fedia/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-xl border border-border px-4 py-2 text-sm text-heading"
-        >
-          Voir la page du projet FedIA
-          <LuArrowUpRight className="size-4 text-muted" />
-        </a>
-      </div>
-
-    </section>
+    </CaseStudy>
   );
 }

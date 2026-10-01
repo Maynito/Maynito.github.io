@@ -1,163 +1,200 @@
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { FaGithub } from 'react-icons/fa6'
-import { LuArrowDown, LuArrowUpRight } from 'react-icons/lu'
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-import ProjectCard from '../components/ProjectCard'
-import Reveal from '../components/Reveal'
+import Feature from "../components/Feature";
+import ProjectIndex from "../components/ProjectIndex";
+import Reveal from "../components/Reveal";
+import SectionHead from "../components/SectionHead";
+import { Dot } from "../components/NavBar";
+import { featured, indexed } from "../data/projects";
 
-import kamas from '../assets/kamas-hdv-merge.png'
+const GITHUB = "https://github.com/Maynito";
 
-const RECENT_PROJECTS = [
-  {
-    title: "Kamas",
-    description: "Outil de suivi des prix Dofus qui repère les crafts les plus rentables.",
-    imageUrl: kamas,
-    projectUrl: "/kamas",
-    techs: ["Python", "FastAPI", "Tesseract", "SQLite", "JavaScript"]
-  },
-  {
-    title: "SmokeLab",
-    description: "Outil de visualisation et de stratégie pour le jeu Counter-Strike 2.",
-    imageUrl: "",
-    projectUrl: "https://github.com/Maynito/smokelab",
-    techs: ["React", "TypeScript", "Tailwind CSS", "Supabase", "Steam Auth"]
-  },
-  {
-    title: "FedIA",
-    description: "Plateforme d'analyse de radiographies médicales.",
-    imageUrl: "",
-    projectUrl: "https://labs.sogeti.com/project/fedia/",
-    techs: ["C#", ".NET", "SolidJS"]
-  }
+// Fiche technique du hero : uniquement des faits.
+const FICHE = [
+  ["Formation", "Master Génie Logiciel — Université de Bordeaux"],
+  ["Expérience", "6 mois chez Capgemini — application web de santé"],
+  ["Front", "React · SolidJS · Angular · TypeScript · Tailwind"],
+  ["Back", "Python · FastAPI · C# / .NET · Java · PostgreSQL"],
+  ["Statut", "Disponible en octobre 2026"],
 ];
 
-const PREVIOUS_PROJECTS = [
+const PARCOURS = [
   {
-    title: "TaskForge",
-    description: "Plateforme de gestion de projet agile : sprints, Kanban, authentification JWT.",
-    imageUrl: "",
-    projectUrl: "https://github.com/Maynito/TaskForge",
-    techs: ["Angular", "TypeScript", "Spring Boot", "PostgreSQL", "Docker", "Swagger / OpenAPI", "JWT"]
+    date: "2024 → 2026",
+    titre: "Master Génie Logiciel",
+    texte: "Université de Bordeaux : conception logicielle, algorithmique, web et données.",
   },
   {
-    title: "Paint App",
-    description: "Application de formes géométriques.",
-    imageUrl: "",
-    projectUrl: "https://github.com/Maynito/projet-paint",
-    techs: ["Java (apprentissage Design Patterns)"]
+    date: "Stage · 6 mois",
+    titre: "Capgemini",
+    texte: "Application web de santé en C#/.NET et SolidJS/TypeScript, au sein d'une équipe produit.",
   },
   {
-    title: "Programmation Large Échelle",
-    description: "Traitement distribué de données Clash Royale avec MapReduce sur cluster Hadoop.",
-    imageUrl: "",
-    projectUrl: "https://github.com/Decymax/ProjetPLE",
-    techs: ["Java", "Python", "Hadoop", "MapReduce", "HDFS"]
-  }
+    date: "Octobre 2026",
+    titre: "Disponible",
+    texte: "À la recherche d'un poste full-stack, plutôt orienté back et traitement de données.",
+    disponible: true,
+  },
 ];
 
-// Module : la cascade ne rejoue pas d'une navigation à l'autre, seulement au chargement.
+// Les 12 filets de la grille, tracés au chargement.
+function GridLines() {
+  return (
+    <div
+      aria-hidden
+      className="gridlines site grid-site pointer-events-none absolute inset-x-0 inset-y-0 max-sm:[&>:nth-child(n+5)]:hidden sm:max-lg:[&>:nth-child(n+9)]:hidden"
+    >
+      {Array.from({ length: 12 }, (_, i) => (
+        <span
+          key={i}
+          style={{ animation: `grid-draw 900ms var(--ease-out-quint) ${i * 30}ms both` }}
+          className="origin-top border-x border-border"
+        />
+      ))}
+    </div>
+  );
+}
+
 let heroPlayed = false;
 
 export default function Home() {
   const [animate] = useState(() => !heroPlayed);
-  useEffect(() => { heroPlayed = true; }, []);
+  useEffect(() => {
+    heroPlayed = true;
+  }, []);
 
-  function scrollToProjects() {
-    document
-      .getElementById('projets-recents')
-      ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  function versProjets() {
+    document.getElementById("projets")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
+
+  const entree = (delay) => (animate ? `animate-enter enter-delay-${delay}` : "");
 
   return (
     <>
-      <section
-        id="hero"
-        className="flex min-h-[calc(100svh-12rem)] flex-col justify-center gap-8 border-b border-border pb-16 text-text sm:min-h-[calc(100svh-15rem)] sm:gap-10 sm:pb-24"
-      >
-        <div className="flex flex-col gap-4">
-          <h1 className={`text-display-sm sm:text-display text-heading ${animate ? 'animate-enter enter-delay-80' : ''}`}>
-            Lucas Autret
+      {/* Écran 1 · Hero */}
+      <section className="relative flex min-h-[max(600px,calc(100svh-var(--hdr)))] items-end border-b border-border pt-[clamp(3rem,6vw,6rem)] pb-[clamp(2.5rem,5vw,4.5rem)]">
+        <GridLines />
+
+        <div className="site grid-site relative">
+          <p
+            className={`label col-span-full mb-[clamp(1.5rem,3vw,2.5rem)] flex flex-wrap justify-between gap-x-6 gap-y-2 ${entree(80)}`}
+          >
+            <span>Développeur full-stack</span>
+            <span className="inline-flex items-center gap-2.5">
+              <Dot /> Disponible en octobre 2026
+            </span>
+          </p>
+
+          <h1 className="col-span-full text-name text-heading">
+            <span className={`block ${entree(160)}`}>Lucas</span>
+            <span className={`name-offset block ${entree(240)}`}>Autret</span>
           </h1>
 
-          <div className={`flex flex-wrap items-center gap-x-3 gap-y-2 ${animate ? 'animate-enter enter-delay-160' : ''}`}>
-            <p className="text-body text-muted">Développeur full-stack</p>
-            <span className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1 text-caption text-text">
-              <span className="relative flex size-2" aria-hidden="true">
-                <span className={`absolute inset-0 rounded-full bg-success ${animate ? 'animate-halo' : ''}`} />
-                <span className="relative size-2 rounded-full bg-success" />
-              </span>
-              Disponible en octobre 2026
+          <div className="col-span-full mt-[clamp(2.5rem,5vw,4.5rem)] grid grid-cols-subgrid gap-y-8">
+            <p
+              className={`col-span-full max-w-[36em] text-lede text-text sm:col-span-6 lg:col-span-5 lg:row-start-1 ${entree(320)}`}
+            >
+              Je construis des outils qui transforment des données brutes en décisions : OCR,
+              API, traitement distribué. Côté interface, je reste là où le back fait le travail.
+            </p>
+
+            <dl
+              className={`col-span-full border-t border-border lg:col-start-7 lg:col-end-13 lg:row-span-2 lg:row-start-1 ${entree(400)}`}
+            >
+              {FICHE.map(([cle, valeur]) => (
+                <div key={cle} className="grid grid-cols-[104px_1fr] gap-4 border-b border-border py-[11px]">
+                  <dt className="label leading-[22px]">{cle}</dt>
+                  <dd className="text-sm leading-[22px] text-text">{valeur}</dd>
+                </div>
+              ))}
+            </dl>
+
+            <div
+              className={`col-span-full grid grid-cols-2 items-center gap-3 sm:flex sm:flex-wrap lg:col-span-5 lg:row-start-2 lg:self-end ${entree(480)}`}
+            >
+              <button type="button" onClick={versProjets} className="btn btn-primary col-span-2">
+                Voir les projets ↓
+              </button>
+              <Link to="/contact" className="btn">
+                Me contacter
+              </Link>
+              <a
+                href={GITHUB}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="justify-self-center text-sm text-muted underline decoration-border-strong underline-offset-[5px] transition-colors hover:text-heading"
+              >
+                GitHub ↗
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Écran 2 · Projets en vedette */}
+      <section id="projets" className="scroll-mt-24 py-section">
+        <SectionHead num="01" title="Projets" note="Deux projets détaillés, quatre autres en index." />
+        {featured.map((p, i) => (
+          <Feature key={p.slug} p={p} index={i + 1} reverse={i % 2 === 1} />
+        ))}
+      </section>
+
+      {/* Écran 3 · Index */}
+      <section className="pb-section">
+        <SectionHead num="02" title="Index" note="Projets personnels et universitaires." />
+        <ProjectIndex items={indexed} />
+      </section>
+
+      {/* Écran 4 · Parcours, bande pleine largeur */}
+      <section className="border-y border-border bg-surface py-[clamp(4rem,8vw,6.3rem)]">
+        <div className="site">
+          <p className="label mb-[clamp(2rem,4vw,3rem)]">03 — Parcours</p>
+          <ol className="grid gap-10 lg:grid-cols-3 lg:gap-6">
+            {PARCOURS.map((etape) => (
+              <Reveal as="li" key={etape.titre} className="border-t border-border-strong pt-5 lg:border-t">
+                <p className="label flex items-center gap-2.5">
+                  {etape.disponible && <Dot />}
+                  {etape.date}
+                </p>
+                <h3 className="mt-3 text-xl font-semibold text-heading">{etape.titre}</h3>
+                <p className="mt-2 text-sm text-muted">{etape.texte}</p>
+              </Reveal>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* Écran 5 · Appel au contact */}
+      <section className="py-section">
+        <div className="site grid-site">
+          <p className="label col-span-full">04 — Contact</p>
+          <h2 className="col-span-full mt-5 text-cta text-heading lg:col-span-10">
+            Un poste full-stack à pourvoir ? Parlons-en.
+          </h2>
+          <div className="col-span-full mt-[clamp(2rem,4vw,3rem)] flex flex-wrap items-center gap-x-8 gap-y-4">
+            <a
+              href="mailto:lucas.autret@hotmail.com"
+              className="text-[clamp(1.2rem,2.4vw,1.75rem)] font-medium text-heading underline decoration-border-strong underline-offset-[6px] transition-colors hover:decoration-heading"
+            >
+              lucas.autret@hotmail.com
+            </a>
+            <span className="flex gap-6 font-mono text-xs text-muted">
+              <a
+                href="https://www.linkedin.com/in/lucas-autret-4814b6387/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-underline hover:text-heading"
+              >
+                LinkedIn ↗
+              </a>
+              <a href={GITHUB} target="_blank" rel="noopener noreferrer" className="link-underline hover:text-heading">
+                GitHub ↗
+              </a>
             </span>
           </div>
         </div>
-
-        <p className={`max-w-[60ch] text-body text-text ${animate ? 'animate-enter enter-delay-240' : ''}`}>
-          Diplômé du Master Génie Logiciel de l’Université de Bordeaux, j’ai passé 6 mois chez
-          Capgemini sur une application web de santé en C#/.NET et SolidJS/TypeScript. À côté, je
-          construis mes propres outils : de l’OCR en Python/FastAPI aux interfaces React.
-        </p>
-
-        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-          <button
-            type="button"
-            onClick={scrollToProjects}
-            className={`group inline-flex items-center justify-center gap-2 rounded-full bg-heading px-5 py-2.5 text-sm font-medium text-bg transition-opacity duration-160 ease-out-quint hover:opacity-90 motion-safe:active:scale-[0.97] ${animate ? 'animate-enter enter-delay-320' : ''}`}
-          >
-            Voir mes projets
-            <LuArrowDown className="size-4 shrink-0 transition-transform duration-240 ease-out-quint motion-safe:group-hover:translate-y-0.5" aria-hidden="true" />
-          </button>
-
-          <Link
-            to="/contact"
-            className={`group inline-flex items-center justify-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm transition-colors duration-160 ease-out-quint hover:border-border-strong hover:bg-surface-hover hover:text-heading motion-safe:active:scale-[0.97] ${animate ? 'animate-enter enter-delay-380' : ''}`}
-          >
-            Me contacter
-            <LuArrowUpRight className="size-4 shrink-0 transition-transform duration-240 ease-out-quint motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5" aria-hidden="true" />
-          </Link>
-
-          <a
-            href="https://github.com/Maynito"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`inline-flex items-center justify-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm transition-colors duration-160 ease-out-quint hover:border-border-strong hover:bg-surface-hover hover:text-heading motion-safe:active:scale-[0.97] ${animate ? 'animate-enter enter-delay-440' : ''}`}
-          >
-            <FaGithub className="size-4 shrink-0" aria-hidden="true" />
-            GitHub
-          </a>
-        </div>
-        <hr className={`mt-auto h-px origin-left border-0 bg-border ${animate ? 'animate-draw' : ''}`} />
       </section>
-
-      <div id="projets-recents" className="scroll-mt-8 space-y-6 pt-16 pb-8 text-lg leading-relaxed text-text sm:pt-24">
-        <Reveal as="h2" className="text-section text-heading">Projets récents</Reveal>
-
-        <div className="@container">
-          <div className="grid grid-cols-1 gap-x-4 gap-y-10 @md:grid-cols-2">
-            {RECENT_PROJECTS.map((projet, index) => (
-              <Reveal key={projet.title} col={index % 2}>
-                <ProjectCard {...projet} eager={index < 2} />
-              </Reveal>
-            ))}
-          </div>
-        </div>
-
-      </div>
-
-      <div id="projets-precedents" className="space-y-6 py-8 text-lg leading-relaxed text-text">
-        <Reveal as="h2" className="text-section text-heading">Projets précédents</Reveal>
-
-        <div className="@container">
-          <div className="grid grid-cols-1 gap-x-4 gap-y-10 @md:grid-cols-2">
-            {PREVIOUS_PROJECTS.map((projet, index) => (
-              <Reveal key={`${projet.title}-${index}`} col={index % 2}>
-                <ProjectCard {...projet} />
-              </Reveal>
-            ))}
-          </div>
-        </div>
-
-      </div>
     </>
-  )
+  );
 }

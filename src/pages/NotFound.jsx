@@ -2,20 +2,28 @@ import { Link } from "react-router-dom";
 
 export default function NotFound() {
   return (
-    <section className="space-y-6 py-20 text-text">
-      <p className="text-label text-muted uppercase">Erreur 404</p>
-      <h1 className="text-page-sm sm:text-page text-heading">
-        Cette page n'existe pas.
-      </h1>
-      <p className="text-muted">
-        Le lien est peut-être incorrect, ou la page a été déplacée.
-      </p>
-      <Link
-        to="/"
-        className="inline-block rounded-3xl bg-surface-hover px-4 py-2 text-sm hover:text-text"
+    <div className="relative flex min-h-[max(520px,calc(100svh-var(--hdr)))] items-center">
+      <div
+        aria-hidden
+        className="gridlines site grid-site pointer-events-none absolute inset-x-0 inset-y-0 max-sm:[&>:nth-child(n+5)]:hidden sm:max-lg:[&>:nth-child(n+9)]:hidden"
       >
-        Retour à l'accueil
-      </Link>
-    </section>
+        {Array.from({ length: 12 }, (_, i) => (
+          <span
+            key={i}
+            style={{ animation: `grid-draw 900ms var(--ease-out-quint) ${i * 30}ms both` }}
+            className="origin-top border-x border-border"
+          />
+        ))}
+      </div>
+
+      <div className="site relative">
+        <p className="label">Erreur 404</p>
+        <p className="mt-4 text-name text-heading">404</p>
+        <p className="mt-6 text-lede text-text">Cette page n&apos;existe pas.</p>
+        <Link to="/" className="btn mt-8">
+          Retour aux projets
+        </Link>
+      </div>
+    </div>
   );
 }
