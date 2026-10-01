@@ -56,7 +56,7 @@ export default function Home() {
   return (
     <>
       {/* Écran 1 · Hero */}
-      <section className="relative flex min-h-[max(600px,calc(100svh-var(--hdr)))] items-end overflow-hidden border-b border-border pt-[clamp(3rem,6vw,6rem)] pb-[clamp(2.5rem,5vw,4.5rem)]">
+      <section className="relative flex min-h-[max(600px,calc(100svh-var(--hdr)))] items-center overflow-hidden border-b border-border pt-[clamp(3rem,6vw,6rem)] pb-[clamp(2.5rem,5vw,4.5rem)]">
         {/* Trame de points : donne du volume au hero, s'efface vers le bas et derrière le texte */}
         <div
           aria-hidden

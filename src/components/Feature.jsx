@@ -67,11 +67,14 @@ export default function Feature({ p, index, reverse = false }) {
           reverse ? "lg:col-start-1 lg:col-end-8" : "lg:col-start-6 lg:col-end-13"
         }`}
       >
-        <div
-          className="relative aspect-[16/10] overflow-hidden border-y border-border bg-surface shadow-frame max-sm:aspect-auto lg:rounded-xl lg:border-x"
+        <Link
+          to={`/${p.slug}`}
+          tabIndex={-1}
+          aria-label={`Lire l'étude de cas : ${p.name}`}
+          className="relative block aspect-[16/10] overflow-hidden border-y border-border bg-surface shadow-frame max-sm:aspect-auto lg:rounded-xl lg:border-x"
         >
           {media}
-        </div>
+        </Link>
         <figcaption
           className="flex justify-between gap-4 pt-3 font-mono text-xs text-muted max-lg:px-[var(--bleed)]"
         >
