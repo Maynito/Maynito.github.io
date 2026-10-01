@@ -64,20 +64,16 @@ export default function Feature({ p, index, reverse = false }) {
         as="figure"
         col={1}
         className={`max-lg:bleed-x col-span-full lg:row-start-1 ${
-          reverse ? "lg:col-start-1 lg:col-end-9 lg:bleed-l" : "lg:col-start-5 lg:col-end-13 lg:bleed-r"
+          reverse ? "lg:col-start-1 lg:col-end-8" : "lg:col-start-6 lg:col-end-13"
         }`}
       >
         <div
-          className={`relative aspect-[16/10] overflow-hidden border-y border-border bg-surface shadow-frame max-sm:aspect-auto ${
-            reverse ? "lg:rounded-r-xl lg:border-r" : "lg:rounded-l-xl lg:border-l"
-          }`}
+          className="relative aspect-[16/10] overflow-hidden border-y border-border bg-surface shadow-frame max-sm:aspect-auto lg:rounded-xl lg:border-x"
         >
           {media}
         </div>
         <figcaption
-          className={`flex justify-between gap-4 pt-3 font-mono text-xs text-muted max-lg:px-[var(--bleed)] ${
-            reverse ? "lg:pl-[var(--bleed)]" : "lg:pr-[var(--bleed)]"
-          }`}
+          className="flex justify-between gap-4 pt-3 font-mono text-xs text-muted max-lg:px-[var(--bleed)]"
         >
           <span>{p.cover?.caption ?? "Architecture, générée depuis projects.js"}</span>
           <span>{p.cover ? "Capture" : "Schéma"}</span>

@@ -38,24 +38,6 @@ const PARCOURS = [
   },
 ];
 
-// Les 12 filets de la grille, tracés au chargement.
-function GridLines() {
-  return (
-    <div
-      aria-hidden
-      className="gridlines site grid-site pointer-events-none absolute inset-x-0 inset-y-0 max-sm:[&>:nth-child(n+5)]:hidden sm:max-lg:[&>:nth-child(n+9)]:hidden"
-    >
-      {Array.from({ length: 12 }, (_, i) => (
-        <span
-          key={i}
-          style={{ animation: `grid-draw 900ms var(--ease-out-quint) ${i * 30}ms both` }}
-          className="origin-top border-x border-border"
-        />
-      ))}
-    </div>
-  );
-}
-
 let heroPlayed = false;
 
 export default function Home() {
@@ -73,8 +55,12 @@ export default function Home() {
   return (
     <>
       {/* Écran 1 · Hero */}
-      <section className="relative flex min-h-[max(600px,calc(100svh-var(--hdr)))] items-end border-b border-border pt-[clamp(3rem,6vw,6rem)] pb-[clamp(2.5rem,5vw,4.5rem)]">
-        <GridLines />
+      <section className="relative flex min-h-[max(600px,calc(100svh-var(--hdr)))] items-end overflow-hidden border-b border-border pt-[clamp(3rem,6vw,6rem)] pb-[clamp(2.5rem,5vw,4.5rem)]">
+        {/* Trame de points : donne du volume au hero, s'efface vers le bas et derrière le texte */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(var(--border-strong)_1px,transparent_1px)] bg-[length:24px_24px] opacity-60 [mask-image:radial-gradient(120%_90%_at_70%_15%,#000_0%,transparent_75%)]"
+        />
 
         <div className="site grid-site relative">
           <p

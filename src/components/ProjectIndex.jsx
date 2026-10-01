@@ -15,7 +15,7 @@ export default function ProjectIndex({ items }) {
 
   return (
     <div className="site grid-site items-start">
-      <ul className="col-span-full lg:col-span-7 [&>li:last-child>a]:border-b">
+      <ul className="col-span-full lg:col-span-6 [&>li:last-child>a]:border-b">
         {GROUPES.map(([groupe, libelle]) => {
           const lignes = items.filter((p) => p.group === groupe);
           if (!lignes.length) return null;
@@ -66,7 +66,7 @@ export default function ProjectIndex({ items }) {
 
       <figure
         aria-hidden
-        className="sticky top-[calc(var(--hdr)+32px)] col-start-9 col-end-13 hidden lg:block"
+        className="sticky top-[calc(var(--hdr)+32px)] col-start-8 col-end-13 hidden lg:block"
       >
         <div
           key={active}
@@ -75,7 +75,7 @@ export default function ProjectIndex({ items }) {
           {current.cover ? (
             <img src={current.cover.src} alt="" className="size-full object-cover object-left-top" />
           ) : (
-            <ArchSchematic project={current} W={480} H={300} fs={13} variant="horizontal" />
+            <ArchSchematic project={current} W={560} H={350} fs={14} variant="horizontal" />
           )}
         </div>
         <figcaption className="mt-3 flex justify-between font-mono text-xs text-muted">

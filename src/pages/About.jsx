@@ -1,4 +1,3 @@
-import profile from "../assets/profile.jpg";
 import Reveal from "../components/Reveal";
 
 // TODO Lucas : vérifier les dates et l'intitulé exact du poste chez Capgemini.
@@ -18,15 +17,7 @@ const OUTILS = [
 export default function About() {
   return (
     <div className="site grid-site items-start py-section">
-      <figure className="col-span-full lg:sticky lg:top-[calc(var(--hdr)+32px)] lg:col-span-4">
-        <img
-          src={profile}
-          alt="Portrait de Lucas Autret"
-          className="w-full rounded-xl border border-border bg-surface object-cover max-lg:aspect-square lg:aspect-[4/5]"
-        />
-      </figure>
-
-      <div className="col-span-full mt-10 lg:col-start-6 lg:col-end-13 lg:mt-0">
+      <div className="col-span-full lg:col-start-3 lg:col-end-11">
         <p className="label">À propos</p>
         <h1 className="mt-4 text-h2 text-heading">Développeur full-stack</h1>
 
