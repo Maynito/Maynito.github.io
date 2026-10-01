@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import ArchSchematic from "./ArchSchematic";
+import DotGrid from "./DotGrid";
 import { projects } from "../data/projects";
 
 function useActiveSection(ids) {
@@ -118,7 +119,9 @@ export default function CaseStudy({ project, chapo, meta, sections, children }) 
 
   return (
     <article>
-      <header className="site grid-site pt-[clamp(3rem,6vw,6rem)]">
+      <div className="relative overflow-hidden pb-[clamp(2rem,4vw,3rem)]">
+      <DotGrid />
+      <header className="site grid-site relative pt-[clamp(3rem,6vw,6rem)]">
         <nav aria-label="Fil d'Ariane" className="label col-span-full mb-[clamp(2.5rem,6vw,5rem)] flex justify-between">
           <Link to="/" className="transition-colors hover:text-heading">
             ← Projets
@@ -143,6 +146,7 @@ export default function CaseStudy({ project, chapo, meta, sections, children }) 
           ))}
         </dl>
       </header>
+      </div>
 
       <figure className="mt-[clamp(3rem,6vw,5rem)] border-y border-border bg-surface py-[clamp(1.5rem,4vw,3rem)]">
         <div className="site">

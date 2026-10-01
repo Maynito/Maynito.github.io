@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaGithub } from "react-icons/fa6";
 
+import DotGrid from "../components/DotGrid";
 import Feature from "../components/Feature";
 import ProjectIndex from "../components/ProjectIndex";
 import Reveal from "../components/Reveal";
@@ -57,11 +58,7 @@ export default function Home() {
     <>
       {/* Écran 1 · Hero */}
       <section className="relative flex min-h-[max(600px,calc(100svh-var(--hdr)))] items-center overflow-hidden border-b border-border pt-[clamp(3rem,6vw,6rem)] pb-[clamp(2.5rem,5vw,4.5rem)]">
-        {/* Trame de points : donne du volume au hero, s'efface vers le bas et derrière le texte */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(var(--border-strong)_1px,transparent_1px)] bg-[length:24px_24px] opacity-60 [mask-image:radial-gradient(120%_90%_at_70%_15%,#000_0%,transparent_75%)]"
-        />
+        <DotGrid />
 
         <div className="site grid-site relative">
           <p

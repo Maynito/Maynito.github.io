@@ -71,9 +71,22 @@ export default function Feature({ p, index, reverse = false }) {
           to={`/${p.slug}`}
           tabIndex={-1}
           aria-label={`Lire l'étude de cas : ${p.name}`}
-          className="relative block aspect-[16/10] overflow-hidden border-y border-border bg-surface shadow-frame max-sm:aspect-auto lg:rounded-xl lg:border-x"
+          className="group/media relative block aspect-[16/10] overflow-hidden border-y border-border bg-surface shadow-frame transition-colors duration-240 ease-out-quint group-hover:border-border-strong max-sm:aspect-auto lg:rounded-xl lg:border-x"
         >
           {media}
+
+          {/* Voile + pastille : signalent que le visuel est cliquable */}
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 bg-bg/35 opacity-0 transition-opacity duration-240 ease-out-quint group-hover:opacity-100"
+          />
+          <span
+            aria-hidden
+            className="pointer-events-none absolute right-4 bottom-4 inline-flex items-center gap-2 rounded-full border border-border-strong bg-bg/85 px-3.5 py-2 text-sm font-medium text-heading opacity-0 backdrop-blur-sm transition duration-280 ease-out-quint group-hover:opacity-100 motion-safe:translate-y-2 motion-safe:group-hover:translate-y-0"
+          >
+            Lire l&apos;étude de cas
+            <span className="transition-transform duration-280 ease-out-quint group-hover:translate-x-0.5">→</span>
+          </span>
         </Link>
         <figcaption
           className="flex justify-between gap-4 pt-3 font-mono text-xs text-muted max-lg:px-[var(--bleed)]"
