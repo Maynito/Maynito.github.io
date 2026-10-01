@@ -65,7 +65,7 @@ export default function Home() {
     <>
       <section
         id="hero"
-        className="flex min-h-[60vh] flex-col justify-center gap-8 py-16 text-primary-text sm:min-h-[70vh] sm:gap-10 sm:py-24"
+        className="flex min-h-[calc(100svh-12rem)] flex-col justify-center gap-8 border-b border-secondary-text/15 pb-16 text-primary-text sm:min-h-[calc(100svh-15rem)] sm:gap-10 sm:pb-24"
       >
         <div className="flex flex-col gap-4">
           <h1 className="text-4xl font-medium tracking-tight text-title sm:text-5xl">
@@ -117,7 +117,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div id="projets-recents" className="space-y-6 py-8 text-lg leading-relaxed text-primary-text">
+      <div id="projets-recents" className="scroll-mt-8 space-y-6 pt-16 pb-8 text-lg leading-relaxed text-primary-text sm:pt-24">
         <h2 className="text-sm font-bold text-secondary-text">Projets récents</h2>
 
         <div className="@container">
