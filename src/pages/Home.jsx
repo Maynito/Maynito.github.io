@@ -1,8 +1,10 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FaGithub } from 'react-icons/fa6'
 import { LuArrowDown, LuArrowUpRight } from 'react-icons/lu'
 
 import ProjectCard from '../components/ProjectCard'
+import Reveal from '../components/Reveal'
 
 import kamas from '../assets/kamas-hdv-merge.png'
 
@@ -54,7 +56,13 @@ const PREVIOUS_PROJECTS = [
   }
 ];
 
+// Module : la cascade ne rejoue pas d'une navigation à l'autre, seulement au chargement.
+let heroPlayed = false;
+
 export default function Home() {
+  const [animate] = useState(() => !heroPlayed);
+  useEffect(() => { heroPlayed = true; }, []);
+
   function scrollToProjects() {
     document
       .getElementById('projets-recents')
@@ -65,23 +73,26 @@ export default function Home() {
     <>
       <section
         id="hero"
-        className="flex min-h-[calc(100svh-12rem)] flex-col justify-center gap-8 border-b border-secondary-text/15 pb-16 text-primary-text sm:min-h-[calc(100svh-15rem)] sm:gap-10 sm:pb-24"
+        className="flex min-h-[calc(100svh-12rem)] flex-col justify-center gap-8 border-b border-border pb-16 text-text sm:min-h-[calc(100svh-15rem)] sm:gap-10 sm:pb-24"
       >
         <div className="flex flex-col gap-4">
-          <h1 className="text-4xl font-medium tracking-tight text-title sm:text-5xl">
+          <h1 className={`text-display-sm sm:text-display text-heading ${animate ? 'animate-enter enter-delay-80' : ''}`}>
             Lucas Autret
           </h1>
 
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-            <p className="text-lg text-primary-text sm:text-xl">Développeur full-stack</p>
-            <span className="inline-flex items-center gap-2 rounded-full border border-secondary-text/25 px-3 py-1 text-xs text-secondary-text">
-              <span className="size-1.5 shrink-0 rounded-full bg-emerald-500" aria-hidden="true" />
+          <div className={`flex flex-wrap items-center gap-x-3 gap-y-2 ${animate ? 'animate-enter enter-delay-160' : ''}`}>
+            <p className="text-body text-muted">Développeur full-stack</p>
+            <span className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1 text-caption text-text">
+              <span className="relative flex size-2" aria-hidden="true">
+                <span className={`absolute inset-0 rounded-full bg-success ${animate ? 'animate-halo' : ''}`} />
+                <span className="relative size-2 rounded-full bg-success" />
+              </span>
               Disponible en octobre 2026
             </span>
           </div>
         </div>
 
-        <p className="max-w-xl leading-relaxed text-primary-text sm:text-lg">
+        <p className={`max-w-[60ch] text-body text-text ${animate ? 'animate-enter enter-delay-240' : ''}`}>
           Diplômé du Master Génie Logiciel de l’Université de Bordeaux, j’ai passé 6 mois chez
           Capgemini sur une application web de santé en C#/.NET et SolidJS/TypeScript. À côté, je
           construis mes propres outils : de l’OCR en Python/FastAPI aux interfaces React.
@@ -91,52 +102,57 @@ export default function Home() {
           <button
             type="button"
             onClick={scrollToProjects}
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-primary-text px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-90"
+            className={`group inline-flex items-center justify-center gap-2 rounded-full bg-heading px-5 py-2.5 text-sm font-medium text-bg transition-opacity duration-160 ease-out-quint hover:opacity-90 motion-safe:active:scale-[0.97] ${animate ? 'animate-enter enter-delay-320' : ''}`}
           >
             Voir mes projets
-            <LuArrowDown className="size-4 shrink-0" aria-hidden="true" />
+            <LuArrowDown className="size-4 shrink-0 transition-transform duration-240 ease-out-quint motion-safe:group-hover:translate-y-0.5" aria-hidden="true" />
           </button>
 
           <Link
             to="/contact"
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-secondary-text/25 px-5 py-2.5 text-sm transition-colors hover:bg-secondary-text/10 hover:text-primary-text"
+            className={`group inline-flex items-center justify-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm transition-colors duration-160 ease-out-quint hover:border-border-strong hover:bg-surface-hover hover:text-heading motion-safe:active:scale-[0.97] ${animate ? 'animate-enter enter-delay-380' : ''}`}
           >
             Me contacter
-            <LuArrowUpRight className="size-4 shrink-0" aria-hidden="true" />
+            <LuArrowUpRight className="size-4 shrink-0 transition-transform duration-240 ease-out-quint motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5" aria-hidden="true" />
           </Link>
 
           <a
             href="https://github.com/Maynito"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-secondary-text/25 px-5 py-2.5 text-sm transition-colors hover:bg-secondary-text/10 hover:text-primary-text"
+            className={`inline-flex items-center justify-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm transition-colors duration-160 ease-out-quint hover:border-border-strong hover:bg-surface-hover hover:text-heading motion-safe:active:scale-[0.97] ${animate ? 'animate-enter enter-delay-440' : ''}`}
           >
             <FaGithub className="size-4 shrink-0" aria-hidden="true" />
             GitHub
           </a>
         </div>
+        <hr className={`mt-auto h-px origin-left border-0 bg-border ${animate ? 'animate-draw' : ''}`} />
       </section>
 
-      <div id="projets-recents" className="scroll-mt-8 space-y-6 pt-16 pb-8 text-lg leading-relaxed text-primary-text sm:pt-24">
-        <h2 className="text-sm font-bold text-secondary-text">Projets récents</h2>
+      <div id="projets-recents" className="scroll-mt-8 space-y-6 pt-16 pb-8 text-lg leading-relaxed text-text sm:pt-24">
+        <Reveal as="h2" className="text-section text-heading">Projets récents</Reveal>
 
         <div className="@container">
           <div className="grid grid-cols-1 gap-x-4 gap-y-10 @md:grid-cols-2">
-            {RECENT_PROJECTS.map((projet) => (
-              <ProjectCard key={projet.title} {...projet} />
+            {RECENT_PROJECTS.map((projet, index) => (
+              <Reveal key={projet.title} col={index % 2}>
+                <ProjectCard {...projet} eager={index < 2} />
+              </Reveal>
             ))}
           </div>
         </div>
 
       </div>
 
-      <div id="projets-precedents" className="space-y-6 py-8 text-lg leading-relaxed text-primary-text">
-        <h2 className="text-sm font-bold text-secondary-text">Projets précédents</h2>
+      <div id="projets-precedents" className="space-y-6 py-8 text-lg leading-relaxed text-text">
+        <Reveal as="h2" className="text-section text-heading">Projets précédents</Reveal>
 
         <div className="@container">
           <div className="grid grid-cols-1 gap-x-4 gap-y-10 @md:grid-cols-2">
             {PREVIOUS_PROJECTS.map((projet, index) => (
-              <ProjectCard key={`${projet.title}-${index}`} {...projet} />
+              <Reveal key={`${projet.title}-${index}`} col={index % 2}>
+                <ProjectCard {...projet} />
+              </Reveal>
             ))}
           </div>
         </div>

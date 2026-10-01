@@ -1,26 +1,159 @@
 @import "tailwindcss";
 
-@theme {
-    --color-background: #0f0f0f;
-    --color-title: #FAFAFA;
-    --color-primary-text: #e4e8ef;
-    --color-secondary-text: #757676;
-    --font-sans: "Inter", sans-serif;
+/* ---------- Valeurs brutes : sombre par défaut ---------- */
+:root {
+  color-scheme: dark;
+  --bg: #0f0f0f;
+  --surface: #161616;
+  --surface-hover: rgb(255 255 255 / 0.06);
+  --border: rgb(255 255 255 / 0.08);
+  --border-strong: rgb(255 255 255 / 0.16);
+  --heading: #fafafa;
+  --text: #e4e8ef;
+  --text-grey: #757676;     /* réservé aux textes >= 24px */
+  --text-muted: #8a8b8b;    /* 5.61:1 sur #0f0f0f */
+  --galaxy: #7c9cff;        /* 7.35:1 sur #0f0f0f */
+  --galaxy-subtle: rgb(124 156 255 / 0.22);
+  --success: #22c55e;
+  --backdrop: rgb(0 0 0 / 0.5);
+  --ds-shadow-frame: inset 0 1px 0 rgb(255 255 255 / 0.04);
+  --ds-shadow-overlay: 0 0 0 1px rgb(255 255 255 / 0.08), 0 24px 64px -16px rgb(0 0 0 / 0.7);
 }
 
-body {
-    background-color: var(--color-background);
+:root.light {
+  color-scheme: light;
+  --bg: #fafafa;
+  --surface: #f2f2f2;
+  --surface-hover: rgb(15 15 15 / 0.05);
+  --border: rgb(15 15 15 / 0.08);
+  --border-strong: rgb(15 15 15 / 0.16);
+  --heading: #0f0f0f;
+  --text: #0f0f0f;
+  --text-muted: #6b6c6c;    /* 5.05:1 sur #fafafa */
+  --galaxy: #3b5bdb;        /* 5.43:1 sur #fafafa */
+  --galaxy-subtle: rgb(59 91 219 / 0.16);
+  --success: #15803d;
+  --backdrop: rgb(15 15 15 / 0.25);
+  --ds-shadow-frame: 0 1px 2px rgb(15 15 15 / 0.04), 0 12px 32px -16px rgb(15 15 15 / 0.14);
+  --ds-shadow-overlay: 0 0 0 1px rgb(15 15 15 / 0.08), 0 24px 64px -16px rgb(15 15 15 / 0.22);
+}
+
+/* ---------- Exposés à Tailwind (bg-bg, text-muted, border-border…) ---------- */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-heading: var(--heading);
+  --color-text: var(--text);
+  --color-grey: var(--text-grey);
+  --color-muted: var(--text-muted);
+  --color-galaxy: var(--galaxy);
+  --color-galaxy-subtle: var(--galaxy-subtle);
+  --color-success: var(--success);
+  --shadow-frame: var(--ds-shadow-frame);
+  --shadow-overlay: var(--ds-shadow-overlay);
+}
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Échelle typographique : text-display, text-page, text-section… */
+  --text-display: 3rem;       --text-display--line-height: 3.25rem;    --text-display--letter-spacing: -0.03em;  --text-display--font-weight: 600;
+  --text-display-sm: 2.25rem; --text-display-sm--line-height: 2.5rem;  --text-display-sm--letter-spacing: -0.03em;  --text-display-sm--font-weight: 600;
+  --text-page: 2.25rem;       --text-page--line-height: 2.5rem;        --text-page--letter-spacing: -0.025em;    --text-page--font-weight: 600;
+  --text-page-sm: 1.875rem;   --text-page-sm--line-height: 2.25rem;    --text-page-sm--letter-spacing: -0.025em; --text-page-sm--font-weight: 600;
+  --text-section: 1.25rem;    --text-section--line-height: 1.75rem;    --text-section--letter-spacing: -0.01em;  --text-section--font-weight: 600;
+  --text-card: 1rem;          --text-card--line-height: 1.5rem;        --text-card--font-weight: 500;
+  --text-body: 1rem;          --text-body--line-height: 1.625rem;
+  --text-body-sm: 0.875rem;   --text-body-sm--line-height: 1.375rem;
+  --text-caption: 0.8125rem;  --text-caption--line-height: 1.25rem;
+  --text-label: 0.75rem;      --text-label--line-height: 1rem;         --text-label--letter-spacing: 0.06em;     --text-label--font-weight: 500;
+
+  /* Courbes */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+  --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Animations : animate-enter, animate-page, animate-draw, animate-halo */
+  --animate-enter: enter 560ms var(--ease-out-quint) both;
+  --animate-page: page 240ms var(--ease-out-quint) both;
+  --animate-draw: draw 800ms var(--ease-in-out) 500ms both;
+  --animate-halo: halo 1600ms ease-out 900ms 3 both;
+
+  @keyframes enter { from { opacity: 0; transform: translateY(12px); } }
+  @keyframes page  { from { opacity: 0; transform: translateY(8px); } }
+  @keyframes draw  { from { transform: scaleX(0); } }
+  @keyframes halo  { from { transform: scale(1); opacity: 0.5; } to { transform: scale(2.4); opacity: 0; } }
+}
+
+/* enter-delay-80 → animation-delay: 80ms */
+@utility enter-delay-* { animation-delay: calc(--value(integer) * 1ms); }
+
+/* Lien qui se souligne au survol */
+@utility link-underline {
+  position: relative;
+  &::after {
+    content: ""; position: absolute; inset-inline: 0; bottom: -2px; height: 1px;
+    background: var(--underline, var(--heading));
+    transform: scaleX(0); transform-origin: right;
+    transition: transform 240ms var(--ease-out-quint);
+  }
+  &:hover::after, &:focus-visible::after { transform: scaleX(1); transform-origin: left; }
 }
 
 @utility page-width {
-    width: 90%;
-    max-width: 840px;
-    margin-inline: auto;
+  width: 90%;
+  max-width: 840px;
+  margin-inline: auto;
 }
 
-.light {
-    --color-background: #FAFAFA;
-    --color-title: #0f0f0f;
-    --color-primary-text: #0f0f0f;
-    --color-secondary-text: #757676;
+@layer base {
+  html { background: var(--bg); color: var(--text); font-feature-settings: "cv11", "ss01"; }
+  body { background-color: var(--bg); }
+  :focus-visible { outline: 2px solid var(--galaxy); outline-offset: 3px; }
+  ::selection { background: var(--galaxy-subtle); }
+  .prose a { --underline: var(--galaxy); text-decoration: underline 1px var(--border-strong); text-underline-offset: 4px; }
+}
+
+/* ---------- Apparition au défilement ---------- */
+[data-reveal] {
+  transition: opacity 560ms var(--ease-out-quint), transform 560ms var(--ease-out-quint);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+html.js [data-reveal]:not(.is-in) { opacity: 0; transform: translateY(16px); }
+@media (min-width: 640px) { [data-reveal-col="1"] { --reveal-delay: 80ms; } }
+
+/* ---------- Palette de commandes ⌘K ---------- */
+.palette {
+  margin: 20vh auto 0; width: min(560px, 100% - 32px); padding: 0; border: 0;
+  border-radius: 12px; background: var(--surface); color: var(--text); box-shadow: var(--ds-shadow-overlay);
+  opacity: 0; transform: translateY(8px) scale(0.98);
+  transition: opacity 120ms var(--ease-in), transform 120ms var(--ease-in),
+              overlay 120ms allow-discrete, display 120ms allow-discrete;
+}
+.palette[open] { opacity: 1; transform: none; transition-duration: 200ms; transition-timing-function: var(--ease-out-quint); }
+@starting-style { .palette[open] { opacity: 0; transform: translateY(8px) scale(0.98); } }
+.palette::backdrop { background: transparent; transition: background-color 120ms, overlay 120ms allow-discrete, display 120ms allow-discrete; }
+.palette[open]::backdrop { background: var(--backdrop); transition-duration: 160ms; }
+@starting-style { .palette[open]::backdrop { background: transparent; } }
+@media (prefers-reduced-motion: reduce) { .palette, .palette[open] { transform: none; } }
+
+/* ---------- Bascule de thème ---------- */
+::view-transition-old(root), ::view-transition-new(root) {
+  animation-duration: 240ms; animation-timing-function: var(--ease-in-out);
+}
+
+/* ---------- Mouvement réduit ---------- */
+@media (prefers-reduced-motion: reduce) {
+  @keyframes enter { from { opacity: 0; } }
+  @keyframes page  { from { opacity: 0; } }
+  .animate-enter, .animate-page { animation-duration: 150ms; animation-delay: 0ms; }
+  .animate-draw, .animate-halo { animation: none; }
+  html.js [data-reveal]:not(.is-in) { transform: none; }
+  [data-reveal] { transition: opacity 150ms linear; transition-delay: 0ms; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
 }

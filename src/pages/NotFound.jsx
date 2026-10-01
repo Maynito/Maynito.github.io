@@ -2,17 +2,17 @@ import { Link } from "react-router-dom";
 
 export default function NotFound() {
   return (
-    <section className="space-y-6 py-20 text-primary-text">
-      <h2 className="text-sm font-bold text-secondary-text">Erreur 404</h2>
-      <h1 className="text-3xl leading-snug font-medium text-title">
+    <section className="space-y-6 py-20 text-text">
+      <p className="text-label text-muted uppercase">Erreur 404</p>
+      <h1 className="text-page-sm sm:text-page text-heading">
         Cette page n'existe pas.
       </h1>
-      <p className="text-secondary-text">
+      <p className="text-muted">
         Le lien est peut-être incorrect, ou la page a été déplacée.
       </p>
       <Link
         to="/"
-        className="inline-block rounded-3xl bg-secondary-text/20 px-4 py-2 text-sm hover:text-primary-text"
+        className="inline-block rounded-3xl bg-surface-hover px-4 py-2 text-sm hover:text-text"
       >
         Retour à l'accueil
       </Link>

@@ -1,3 +1,4 @@
+import Reveal from "../components/Reveal";
 // Premier jet : les dates et les intitulés sont à vérifier / compléter.
 const EXPERIENCES = [
   {
@@ -22,11 +23,11 @@ const OUTILS = [
 
 export default function About() {
   return (
-    <section id="about" className="space-y-16 py-12 sm:py-20 text-primary-text">
+    <section id="about" className="space-y-16 py-12 sm:py-20 text-text">
 
       <div className="space-y-6">
-        <h2 className="text-sm font-bold text-secondary-text">À propos</h2>
-        <h1 className="text-3xl leading-snug font-medium text-title">
+        <p className="text-label text-muted uppercase">À propos</p>
+        <h1 className="text-page-sm sm:text-page text-heading">
           Développeur full-stack
         </h1>
 
@@ -43,7 +44,7 @@ export default function About() {
             contraintes métier, et l'importance de comprendre l'usage avant de coder.
           </p>
           <p>
-            À côté, je construis mes propres outils. <span className="text-title">Kamas</span> en
+            À côté, je construis mes propres outils. <span className="text-heading">Kamas</span> en
             est le meilleur exemple : il lit les prix de l'hôtel des ventes de Dofus par
             reconnaissance de texte, puis calcule les crafts les plus rentables. Ce sont ces
             projets-là que je préfère, ceux qui me permettent de créer quelque chose de concret
@@ -57,24 +58,24 @@ export default function About() {
       </div>
 
       <div className="space-y-6">
-        <h2 className="text-sm font-bold text-secondary-text">Parcours</h2>
-        <ul className="divide-y divide-secondary-text/15 border-y border-secondary-text/15">
+        <Reveal as="h2" className="text-section text-heading">Parcours</Reveal>
+        <ul className="divide-y divide-border border-y border-border">
           {EXPERIENCES.map((experience) => (
             <li key={experience.structure} className="flex items-start justify-between gap-6 py-4">
               <div className="space-y-1">
-                <p className="text-title">{experience.structure}</p>
-                <p className="text-sm text-secondary-text">{experience.poste}</p>
-                <p className="text-sm text-secondary-text">{experience.detail}</p>
+                <p className="text-heading">{experience.structure}</p>
+                <p className="text-sm text-muted">{experience.poste}</p>
+                <p className="text-sm text-muted">{experience.detail}</p>
               </div>
-              <p className="shrink-0 text-sm text-secondary-text">{experience.periode}</p>
+              <p className="shrink-0 text-sm text-muted">{experience.periode}</p>
             </li>
           ))}
         </ul>
       </div>
 
       <div className="space-y-6">
-        <h2 className="text-sm font-bold text-secondary-text">Outils</h2>
-        <p className="leading-relaxed text-secondary-text">
+        <Reveal as="h2" className="text-section text-heading">Outils</Reveal>
+        <p className="leading-relaxed text-muted">
           {OUTILS.join(" · ")}
         </p>
       </div>
