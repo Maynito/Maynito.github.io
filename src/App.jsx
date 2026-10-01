@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import Kamas from './pages/Kamas'
+import FedIA from './pages/FedIA'
 import NotFound from './pages/NotFound'
 import ScrollToTop from './components/ScrollToTop'
 
@@ -21,6 +22,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/kamas" element={<Kamas />} />
+            <Route path="/fedia" element={<FedIA />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

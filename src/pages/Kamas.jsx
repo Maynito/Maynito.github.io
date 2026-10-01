@@ -1,4 +1,15 @@
-import { LuMonitor, LuServer, LuGlobe } from "react-icons/lu";
+// TODO Lucas : vérifier/corriger chaque point de QUALITE — contenu à confirmer,
+// ne pas publier tel quel. Les 4 cartes (tests, CI, Docker, observabilité) ont été
+// rédigées comme une trame plausible, pas à partir du dépôt réel du projet.
+import {
+  LuMonitor,
+  LuServer,
+  LuGlobe,
+  LuFlaskConical,
+  LuGitBranch,
+  LuContainer,
+  LuActivity,
+} from "react-icons/lu";
 import kamas1 from "../assets/kamas1.png";
 import kamas2 from "../assets/kamas2.png";
 import kamas3 from "../assets/kamas3.png";
@@ -35,6 +46,37 @@ const SERVICES = [
   },
 ];
 
+// TODO Lucas : relire ce tableau ligne par ligne avant publication.
+// Chaque point doit correspondre à ce qui existe vraiment dans le dépôt
+// (fichiers de tests, workflow GitHub Actions, docker-compose, logs).
+// Supprime les points non implémentés plutôt que de les laisser.
+const QUALITE = [
+  {
+    icon: LuFlaskConical,
+    nom: "Tests",
+    detail:
+      "Tests unitaires sur le calcul de rentabilité (coût des ressources, taxe de l'hôtel de vente, marge). Tests d'intégration sur les routes de l'API, avec une base de test dédiée. Pour la capture, un jeu de captures d'écran de référence sert à vérifier que l'OCR et la reconnaissance d'icônes renvoient toujours les mêmes prix.",
+  },
+  {
+    icon: LuGitBranch,
+    nom: "Intégration continue",
+    detail:
+      "Un workflow GitHub Actions se déclenche à chaque push : lint, puis exécution des tests, puis construction de l'image Docker de l'API. L'objectif est de détecter une régression avant le déploiement plutôt qu'en production.",
+  },
+  {
+    icon: LuContainer,
+    nom: "Conteneurisation",
+    detail:
+      "L'API et PostgreSQL sont décrits dans un docker compose, ce qui permet de relancer l'environnement complet avec une seule commande. La configuration passe par des variables d'environnement, et les migrations Alembic sont appliquées au démarrage. Le Collector reste hors conteneur : il a besoin d'un accès direct à la fenêtre du jeu.",
+  },
+  {
+    icon: LuActivity,
+    nom: "Observabilité",
+    detail:
+      "Logs structurés côté API pour retrouver l'origine d'un relevé incohérent. Une route de healthcheck indique si l'API et la base répondent. Les échecs de capture sont enregistrés à part, car une mise à jour du jeu peut suffire à casser la lecture des prix.",
+  },
+];
+
 export default function Kamas() {
   return (
     <section id="kamas" className="space-y-16 py-12 sm:py-20 text-primary-text">
@@ -61,7 +103,7 @@ export default function Kamas() {
         <h2 className="text-sm font-bold text-secondary-text">Le projet</h2>
         <div className="max-w-2xl space-y-4 leading-relaxed">
           <p>
-            Ce projet à pour but de lire les prix de l'Hôtel de Vente de Dofus par reconnaissance d'image
+            Ce projet a pour but de lire les prix de l'Hôtel de Vente de Dofus par reconnaissance d'image
             (icônes + OCR des chiffres — aucune lecture mémoire du jeu), garde un
             historique, et calcule la rentabilité de la fabrication d'objets et de familiers.
           </p>
@@ -89,6 +131,25 @@ export default function Kamas() {
               <p className="text-title">{service.nom}</p>
               <p className="text-xs text-secondary-text">{service.lieu}</p>
               <p className="text-sm leading-relaxed text-secondary-text">{service.detail}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="space-y-6">
+        <h2 className="text-sm font-bold text-secondary-text">Qualité &amp; déploiement</h2>
+        <p className="max-w-2xl leading-relaxed text-secondary-text">
+          La partie fragile du projet n'est pas le code métier mais la capture : elle dépend
+          de l'affichage du jeu. Les tests et le suivi en production servent d'abord à voir
+          rapidement quand un relevé devient faux.
+        </p>
+
+        <ul className="grid gap-4 sm:grid-cols-2">
+          {QUALITE.map((bloc) => (
+            <li key={bloc.nom} className="space-y-2 rounded-xl border border-secondary-text/20 p-4">
+              <bloc.icon className="size-5 text-secondary-text" />
+              <p className="text-title">{bloc.nom}</p>
+              <p className="text-sm leading-relaxed text-secondary-text">{bloc.detail}</p>
             </li>
           ))}
         </ul>
