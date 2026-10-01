@@ -27,23 +27,23 @@ const LIENS = [
 
 export default function Contact() {
   return (
-    <section id="contact" className="space-y-6 py-8 leading-relaxed text-primary-text">
-      <h2 className="text-sm font-bold text-secondary-text">Contact</h2>
+    <section id="contact" className="space-y-6 py-8 leading-relaxed text-text">
+      <h1 className="text-page-sm sm:text-page text-heading">Contact</h1>
       <p>Vous pouvez me contacter via les moyens suivants :</p>
 
-      <ul className="divide-y divide-secondary-text/15 border-y border-secondary-text/15">
+      <ul className="divide-y divide-border border-y border-border">
         {LIENS.map(({ label, value, href, icon: Icon, externe }) => (
           <li key={label}>
             <a
               href={href}
               target={externe ? "_blank" : undefined}
               rel={externe ? "noopener noreferrer" : undefined}
-              className="group flex items-center gap-4 py-4 transition-colors hover:text-primary-text"
+              className="group flex items-center gap-4 py-4 transition-colors hover:text-text"
             >
-              <Icon className="size-5 shrink-0 text-secondary-text group-hover:text-primary-text" />
-              <span className="w-24 shrink-0 text-sm text-secondary-text">{label}</span>
+              <Icon className="size-5 shrink-0 text-muted group-hover:text-text" />
+              <span className="w-24 shrink-0 text-sm text-muted">{label}</span>
               <span className="truncate text-sm">{value}</span>
-              <LuArrowUpRight className="ml-auto size-4 shrink-0 text-secondary-text group-hover:text-primary-text" />
+              <LuArrowUpRight className="ml-auto size-4 shrink-0 text-muted group-hover:text-text" />
             </a>
           </li>
         ))}

@@ -13,6 +13,7 @@ import {
 import kamas1 from "../assets/kamas1.png";
 import kamas2 from "../assets/kamas2.png";
 import kamas3 from "../assets/kamas3.png";
+import Reveal from "../components/Reveal";
 
 const SCREENSHOTS = [
   { src: kamas1, alt: "Tableau de bord Kamas : crafts et familiers les plus rentables" },
@@ -79,28 +80,28 @@ const QUALITE = [
 
 export default function Kamas() {
   return (
-    <section id="kamas" className="space-y-16 py-12 sm:py-20 text-primary-text">
+    <section id="kamas" className="space-y-16 py-12 sm:py-20 text-text">
 
       <div className="space-y-6">
-        <h2 className="text-sm font-bold text-secondary-text">Étude de cas</h2>
-        <h1 className="text-3xl leading-snug font-medium text-title">
+        <p className="text-label text-muted uppercase">Étude de cas</p>
+        <h1 className="text-page-sm sm:text-page text-heading">
           Kamas — suivi de prix Dofus
         </h1>
-        <p className="max-w-2xl leading-relaxed text-secondary-text">
+        <p className="max-w-2xl font-mono text-xs text-muted">
           {STACK.join(" · ")}
         </p>
       </div>
 
       <ul className="grid gap-4 sm:grid-cols-3">
         {SCREENSHOTS.map((shot) => (
-          <li key={shot.src} className="aspect-[16/10] overflow-hidden rounded-xl border border-secondary-text/20">
+          <li key={shot.src} className="aspect-[16/10] overflow-hidden rounded-xl border border-border">
             <img src={shot.src} alt={shot.alt} className="h-full w-full object-cover object-top" />
           </li>
         ))}
       </ul>
 
       <div className="space-y-4">
-        <h2 className="text-sm font-bold text-secondary-text">Le projet</h2>
+        <Reveal as="h2" className="text-section text-heading">Le projet</Reveal>
         <div className="max-w-2xl space-y-4 leading-relaxed">
           <p>
             Ce projet a pour but de lire les prix de l'Hôtel de Vente de Dofus par reconnaissance d'image
@@ -108,17 +109,17 @@ export default function Kamas() {
             historique, et calcule la rentabilité de la fabrication d'objets et de familiers.
           </p>
           <p>
-            Une page <span className="text-title">Atelier</span> planifie les ressources à
+            Une page <span className="text-heading">Atelier</span> planifie les ressources à
             rassembler pour la fabrication d'objets ; une page{" "}
-            <span className="text-title">Suivis</span> permet de suivre manuellement un
+            <span className="text-heading">Suivis</span> permet de suivre manuellement un
             achat jusqu'à sa revente afin de visualiser les bénéfices réalisés.
           </p>
         </div>
       </div>
 
       <div className="space-y-6">
-        <h2 className="text-sm font-bold text-secondary-text">Architecture</h2>
-        <p className="max-w-2xl leading-relaxed text-secondary-text">
+        <Reveal as="h2" className="text-section text-heading">Architecture</Reveal>
+        <p className="max-w-[60ch] text-body text-muted">
           Le projet est découpé en trois services : la capture doit tourner sur le PC du
           joueur, tandis que l'API et le front doivent rester en ligne en permanence — un
           découpage producteur/consommateur classique.
@@ -126,19 +127,19 @@ export default function Kamas() {
 
         <ul className="grid gap-4 sm:grid-cols-3">
           {SERVICES.map((service) => (
-            <li key={service.nom} className="space-y-2 rounded-xl border border-secondary-text/20 p-4">
-              <service.icon className="size-5 text-secondary-text" />
-              <p className="text-title">{service.nom}</p>
-              <p className="text-xs text-secondary-text">{service.lieu}</p>
-              <p className="text-sm leading-relaxed text-secondary-text">{service.detail}</p>
+            <li key={service.nom} className="space-y-2 rounded-xl border border-border p-4">
+              <service.icon className="size-5 text-muted" />
+              <p className="text-heading">{service.nom}</p>
+              <p className="text-xs text-muted">{service.lieu}</p>
+              <p className="text-body-sm text-muted">{service.detail}</p>
             </li>
           ))}
         </ul>
       </div>
 
       <div className="space-y-6">
-        <h2 className="text-sm font-bold text-secondary-text">Qualité &amp; déploiement</h2>
-        <p className="max-w-2xl leading-relaxed text-secondary-text">
+        <Reveal as="h2" className="text-section text-heading">Qualité &amp; déploiement</Reveal>
+        <p className="max-w-[60ch] text-body text-muted">
           La partie fragile du projet n'est pas le code métier mais la capture : elle dépend
           de l'affichage du jeu. Les tests et le suivi en production servent d'abord à voir
           rapidement quand un relevé devient faux.
@@ -146,10 +147,10 @@ export default function Kamas() {
 
         <ul className="grid gap-4 sm:grid-cols-2">
           {QUALITE.map((bloc) => (
-            <li key={bloc.nom} className="space-y-2 rounded-xl border border-secondary-text/20 p-4">
-              <bloc.icon className="size-5 text-secondary-text" />
-              <p className="text-title">{bloc.nom}</p>
-              <p className="text-sm leading-relaxed text-secondary-text">{bloc.detail}</p>
+            <li key={bloc.nom} className="space-y-2 rounded-xl border border-border p-4">
+              <bloc.icon className="size-5 text-muted" />
+              <p className="text-heading">{bloc.nom}</p>
+              <p className="text-body-sm text-muted">{bloc.detail}</p>
             </li>
           ))}
         </ul>

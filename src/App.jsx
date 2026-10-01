@@ -8,23 +8,24 @@ import Contact from './pages/Contact'
 import Kamas from './pages/Kamas'
 import FedIA from './pages/FedIA'
 import NotFound from './pages/NotFound'
-import ScrollToTop from './components/ScrollToTop'
+import PageTransition from './components/PageTransition'
 
 function App() {
   return (
     <HashRouter>
-      <ScrollToTop />
-      <div className="App bg-background min-h-screen flex flex-col">
+      <div className="App bg-bg min-h-screen flex flex-col">
         <NavBar />
         <main className="page-width flex-1">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/kamas" element={<Kamas />} />
-            <Route path="/fedia" element={<FedIA />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <PageTransition>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/kamas" element={<Kamas />} />
+              <Route path="/fedia" element={<FedIA />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </PageTransition>
         </main>
         <Footer />
       </div>
