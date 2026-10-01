@@ -2,20 +2,20 @@ import { HashRouter, Routes, Route } from 'react-router-dom'
 
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
+import PageTransition from './components/PageTransition'
 import Home from './pages/Home'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import Kamas from './pages/Kamas'
 import FedIA from './pages/FedIA'
 import NotFound from './pages/NotFound'
-import PageTransition from './components/PageTransition'
 
 function App() {
   return (
     <HashRouter>
-      <div className="App bg-bg min-h-screen flex flex-col">
+      <div className="App flex min-h-screen flex-col bg-bg">
         <NavBar />
-        <main className="page-width flex-1">
+        <main className="flex-1">
           <PageTransition>
             <Routes>
               <Route path="/" element={<Home />} />

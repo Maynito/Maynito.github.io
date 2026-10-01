@@ -27,27 +27,30 @@ const LIENS = [
 
 export default function Contact() {
   return (
-    <section id="contact" className="space-y-6 py-8 leading-relaxed text-text">
-      <h1 className="text-page-sm sm:text-page text-heading">Contact</h1>
-      <p>Vous pouvez me contacter via les moyens suivants :</p>
+    <div className="site grid-site py-section">
+      <p className="label col-span-full">Contact</p>
 
-      <ul className="divide-y divide-border border-y border-border">
+      <h1 className="col-span-full mt-5 text-cta text-heading lg:col-span-10">
+        Un poste full-stack à pourvoir ? Parlons-en.
+      </h1>
+
+      <ul className="col-span-full mt-[clamp(2.5rem,5vw,4rem)] border-t border-border lg:col-span-8">
         {LIENS.map(({ label, value, href, icon: Icon, externe }) => (
           <li key={label}>
             <a
               href={href}
               target={externe ? "_blank" : undefined}
               rel={externe ? "noopener noreferrer" : undefined}
-              className="group flex items-center gap-4 py-4 transition-colors hover:text-text"
+              className="group flex items-center gap-5 border-b border-border py-6 transition-colors hover:text-heading"
             >
-              <Icon className="size-5 shrink-0 text-muted group-hover:text-text" />
-              <span className="w-24 shrink-0 text-sm text-muted">{label}</span>
-              <span className="truncate text-sm">{value}</span>
-              <LuArrowUpRight className="ml-auto size-4 shrink-0 text-muted group-hover:text-text" />
+              <Icon className="size-5 shrink-0 text-muted transition-colors group-hover:text-heading" />
+              <span className="label w-24 shrink-0">{label}</span>
+              <span className="truncate text-row text-heading">{value}</span>
+              <LuArrowUpRight className="ml-auto size-5 shrink-0 text-muted transition duration-280 ease-out-quint group-hover:text-heading motion-safe:group-hover:translate-x-1 motion-safe:group-hover:-translate-y-1" />
             </a>
           </li>
         ))}
       </ul>
-    </section>
+    </div>
   );
 }

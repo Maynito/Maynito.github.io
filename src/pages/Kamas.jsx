@@ -1,161 +1,174 @@
-// TODO Lucas : vérifier/corriger chaque point de QUALITE — contenu à confirmer,
-// ne pas publier tel quel. Les 4 cartes (tests, CI, Docker, observabilité) ont été
-// rédigées comme une trame plausible, pas à partir du dépôt réel du projet.
-import {
-  LuMonitor,
-  LuServer,
-  LuGlobe,
-  LuFlaskConical,
-  LuGitBranch,
-  LuContainer,
-  LuActivity,
-} from "react-icons/lu";
+// TODO Lucas : la section « Qualité & déploiement » et les décisions techniques ont été
+// rédigées comme une trame plausible, pas à partir du dépôt réel. Relis ligne par ligne
+// et supprime ce qui n'existe pas plutôt que de le laisser.
+import ArchSchematic from "../components/ArchSchematic";
+import CaseStudy, { Adr, Figure, QualityTable } from "../components/CaseStudy";
 import kamas1 from "../assets/kamas1.png";
 import kamas2 from "../assets/kamas2.png";
-import kamas3 from "../assets/kamas3.png";
-import Reveal from "../components/Reveal";
+import { bySlug } from "../data/projects";
 
-const SCREENSHOTS = [
-  { src: kamas1, alt: "Tableau de bord Kamas : crafts et familiers les plus rentables" },
-  { src: kamas2, alt: "Tableau de bord Kamas, détail des crafts les plus rentables" },
-  { src: kamas3, alt: "Page Suivis : achats en cours et bénéfices réalisés" },
+const projet = bySlug("kamas");
+
+const SECTIONS = [
+  { id: "contexte", titre: "Contexte" },
+  { id: "construit", titre: "Ce que j'ai construit" },
+  { id: "architecture", titre: "Architecture" },
+  { id: "decisions", titre: "Décisions techniques" },
+  { id: "qualite", titre: "Qualité & déploiement" },
+  { id: "bilan", titre: "Bilan" },
 ];
 
-const STACK = [
-  "Python", "FastAPI", "PostgreSQL", "SQLAlchemy", "Alembic",
-  "Tesseract OCR", "pywin32", "Docker", "Jinja", "Pydantic",
+const META = [
+  ["Rôle", "Conception et développement, seul"],
+  ["Contexte", "Projet personnel"],
+  ["Durée", "En cours"],
+  ["Stack", "Python · FastAPI · PostgreSQL · Tesseract · Docker"],
 ];
 
-const SERVICES = [
-  {
-    icon: LuMonitor,
-    nom: "Collector",
-    lieu: "PC du joueur",
-    detail: "Capture la fenêtre du jeu en direct et identifie les prix par OCR + reconnaissance d'icônes. Doit tourner en local : impossible de capturer une fenêtre de jeu depuis le cloud.",
-  },
-  {
-    icon: LuServer,
-    nom: "Price API",
-    lieu: "Hébergée",
-    detail: "FastAPI + PostgreSQL, source de vérité : reçoit les relevés du Collector, calcule la rentabilité des crafts et sert les données au Front.",
-  },
-  {
-    icon: LuGlobe,
-    nom: "Front",
-    lieu: "Hébergé",
-    detail: "Présentation seule : affiche les données de l'API sans jamais toucher directement à la base.",
-  },
-];
-
-// TODO Lucas : relire ce tableau ligne par ligne avant publication.
-// Chaque point doit correspondre à ce qui existe vraiment dans le dépôt
-// (fichiers de tests, workflow GitHub Actions, docker-compose, logs).
-// Supprime les points non implémentés plutôt que de les laisser.
 const QUALITE = [
-  {
-    icon: LuFlaskConical,
-    nom: "Tests",
-    detail:
-      "Tests unitaires sur le calcul de rentabilité (coût des ressources, taxe de l'hôtel de vente, marge). Tests d'intégration sur les routes de l'API, avec une base de test dédiée. Pour la capture, un jeu de captures d'écran de référence sert à vérifier que l'OCR et la reconnaissance d'icônes renvoient toujours les mêmes prix.",
-  },
-  {
-    icon: LuGitBranch,
-    nom: "Intégration continue",
-    detail:
-      "Un workflow GitHub Actions se déclenche à chaque push : lint, puis exécution des tests, puis construction de l'image Docker de l'API. L'objectif est de détecter une régression avant le déploiement plutôt qu'en production.",
-  },
-  {
-    icon: LuContainer,
-    nom: "Conteneurisation",
-    detail:
-      "L'API et PostgreSQL sont décrits dans un docker compose, ce qui permet de relancer l'environnement complet avec une seule commande. La configuration passe par des variables d'environnement, et les migrations Alembic sont appliquées au démarrage. Le Collector reste hors conteneur : il a besoin d'un accès direct à la fenêtre du jeu.",
-  },
-  {
-    icon: LuActivity,
-    nom: "Observabilité",
-    detail:
-      "Logs structurés côté API pour retrouver l'origine d'un relevé incohérent. Une route de healthcheck indique si l'API et la base répondent. Les échecs de capture sont enregistrés à part, car une mise à jour du jeu peut suffire à casser la lecture des prix.",
-  },
+  [
+    "Tests",
+    "Tests unitaires sur le calcul de rentabilité (coût des ressources, marge). Tests d'intégration sur les routes de l'API. Pour la capture, un jeu de captures de référence vérifie que l'OCR renvoie toujours les mêmes prix.",
+  ],
+  [
+    "Intégration continue",
+    "Workflow GitHub Actions à chaque push : lint, tests, puis construction de l'image Docker de l'API.",
+  ],
+  [
+    "Déploiement",
+    "API et PostgreSQL décrits dans un docker compose, configuration par variables d'environnement. Le Collector reste hors conteneur : il a besoin d'un accès direct à la fenêtre du jeu.",
+  ],
+  [
+    "Observabilité",
+    "Logs structurés côté API pour retrouver l'origine d'un relevé incohérent, route de healthcheck, et enregistrement séparé des échecs de capture.",
+  ],
 ];
 
 export default function Kamas() {
   return (
-    <section id="kamas" className="space-y-16 py-12 sm:py-20 text-text">
+    <CaseStudy
+      project={projet}
+      chapo="Lire les prix de l'hôtel des ventes de Dofus par reconnaissance d'image, en garder l'historique, et calculer la rentabilité réelle de chaque craft."
+      meta={META}
+      sections={SECTIONS}
+    >
+      <h2 id="contexte">
+        <small className="label mb-2 block">01</small>
+        Contexte
+      </h2>
+      <p>
+        Dans Dofus, fabriquer un objet n&apos;est rentable que si le prix des ressources reste
+        inférieur à celui de l&apos;objet fini, taxe comprise. Ces prix changent en permanence et ne
+        sont consultables qu&apos;en jeu, hôtel de vente par hôtel de vente. Comparer quelques
+        dizaines de recettes à la main prend un temps considérable, et le résultat est périmé le
+        lendemain.
+      </p>
+      <p>
+        Les outils existants reposent sur des prix saisis par les joueurs, donc souvent faux ou
+        obsolètes. Je voulais des relevés issus du jeu lui-même, horodatés, et un calcul de marge
+        automatique.
+      </p>
 
-      <div className="space-y-6">
-        <p className="text-label text-muted uppercase">Étude de cas</p>
-        <h1 className="text-page-sm sm:text-page text-heading">
-          Kamas — suivi de prix Dofus
-        </h1>
-        <p className="max-w-2xl font-mono text-xs text-muted">
-          {STACK.join(" · ")}
-        </p>
+      <h2 id="construit">
+        <small className="label mb-2 block">02</small>
+        Ce que j&apos;ai construit
+      </h2>
+      <p>
+        Un collecteur capture la fenêtre du jeu, identifie les objets par reconnaissance d&apos;icônes
+        et lit les prix par OCR — aucune lecture de la mémoire du jeu. Les relevés partent vers une
+        API qui les historise, puis calcule la rentabilité de chaque craft et de chaque familier.
+      </p>
+      <p>
+        Une page <code>Atelier</code> planifie les ressources à rassembler pour une fabrication. Une
+        page <code>Suivis</code> permet de suivre un achat jusqu&apos;à sa revente, pour mesurer le
+        bénéfice réellement réalisé plutôt que le bénéfice théorique.
+      </p>
+
+      <Figure num={2} wide caption="Crafts les plus rentables, triés par bénéfice mensuel estimé">
+        <img src={kamas2} alt="Tableau des crafts les plus rentables" className="w-full" />
+      </Figure>
+
+      <Figure num={3} caption="Page Suivis : investissements en cours et bénéfices réalisés">
+        <img src={kamas1} alt="Tableau de bord Kamas" className="w-full" />
+      </Figure>
+
+      <h2 id="architecture">
+        <small className="label mb-2 block">03</small>
+        Architecture
+      </h2>
+      <p>
+        Le projet est découpé en trois services, pour une raison simple : la capture doit tourner sur
+        le PC du joueur, alors que l&apos;API et le front doivent rester disponibles en permanence.
+        C&apos;est un découpage producteur/consommateur classique.
+      </p>
+      <p>
+        Le <strong className="font-medium text-heading">Collector</strong> produit les relevés.
+        La <strong className="font-medium text-heading">Price API</strong> (FastAPI + PostgreSQL) est
+        la source de vérité : elle reçoit les relevés, calcule la rentabilité et sert les données.
+        Le <strong className="font-medium text-heading">Front</strong> ne fait que présenter : il ne
+        touche jamais directement à la base.
+      </p>
+
+      <Figure num={4} wide caption="Architecture, générée depuis projects.js">
+        <ArchSchematic project={projet} W={1000} H={430} />
+      </Figure>
+
+      <h2 id="decisions">
+        <small className="label mb-2 block">04</small>
+        Décisions techniques
+      </h2>
+
+      <div className="mt-6 grid gap-4">
+        <Adr
+          titre="OCR plutôt que lecture mémoire"
+          contexte="Les prix ne sont accessibles que dans l'interface du jeu."
+          decision="Capturer l'écran et lire les prix par OCR, avec reconnaissance des icônes d'objets."
+          compromis="Plus fragile qu'une lecture mémoire et sensible aux mises à jour graphiques, mais sans modification du client du jeu."
+        />
+        <Adr
+          titre="Collector local, API hébergée"
+          contexte="Impossible de capturer une fenêtre de jeu depuis un serveur distant."
+          decision="Séparer la capture (poste du joueur) du stockage et du calcul (hébergés)."
+          compromis="Deux environnements à maintenir, mais l'historique reste disponible même quand le PC est éteint."
+        />
+        <Adr
+          titre="PostgreSQL plutôt que SQLite"
+          contexte="Les relevés s'accumulent et plusieurs services les lisent en même temps."
+          decision="Passer sur PostgreSQL, avec migrations versionnées."
+          compromis="Un service de plus à opérer, compensé par les accès concurrents et les requêtes d'historique."
+        />
       </div>
 
-      <ul className="grid gap-4 sm:grid-cols-3">
-        {SCREENSHOTS.map((shot) => (
-          <li key={shot.src} className="aspect-[16/10] overflow-hidden rounded-xl border border-border">
-            <img src={shot.src} alt={shot.alt} className="h-full w-full object-cover object-top" />
-          </li>
-        ))}
-      </ul>
+      <h2 id="qualite">
+        <small className="label mb-2 block">05</small>
+        Qualité &amp; déploiement
+      </h2>
+      <p>
+        La partie fragile du projet est la capture : une mise à jour du jeu peut suffire à casser la
+        lecture des prix. Les tests et le suivi servent donc d&apos;abord à détecter un relevé faux.
+      </p>
+      <QualityTable rows={QUALITE} />
 
-      <div className="space-y-4">
-        <Reveal as="h2" className="text-section text-heading">Le projet</Reveal>
-        <div className="max-w-2xl space-y-4 leading-relaxed">
-          <p>
-            Ce projet a pour but de lire les prix de l'Hôtel de Vente de Dofus par reconnaissance d'image
-            (icônes + OCR des chiffres — aucune lecture mémoire du jeu), garde un
-            historique, et calcule la rentabilité de la fabrication d'objets et de familiers.
-          </p>
-          <p>
-            Une page <span className="text-heading">Atelier</span> planifie les ressources à
-            rassembler pour la fabrication d'objets ; une page{" "}
-            <span className="text-heading">Suivis</span> permet de suivre manuellement un
-            achat jusqu'à sa revente afin de visualiser les bénéfices réalisés.
-          </p>
+      <h2 id="bilan">
+        <small className="label mb-2 block">06</small>
+        Bilan
+      </h2>
+      <div className="mt-6 grid gap-8 sm:grid-cols-2">
+        <div>
+          <p className="label mb-3">Ce qui fonctionne</p>
+          <ul className="list-disc space-y-2 pl-5 text-sm leading-[22px] text-text">
+            <li>Le découpage en trois services : chaque partie évolue sans casser les autres.</li>
+            <li>L&apos;historique des prix, qui rend les calculs de marge crédibles.</li>
+          </ul>
+        </div>
+        <div>
+          <p className="label mb-3">Ce que je referais autrement</p>
+          <ul className="list-disc space-y-2 pl-5 text-sm leading-[22px] text-text">
+            <li>Mettre en place le jeu de captures de référence dès le début du projet.</li>
+            <li>Isoler plus tôt la reconnaissance d&apos;icônes du reste du collecteur.</li>
+          </ul>
         </div>
       </div>
-
-      <div className="space-y-6">
-        <Reveal as="h2" className="text-section text-heading">Architecture</Reveal>
-        <p className="max-w-[60ch] text-body text-muted">
-          Le projet est découpé en trois services : la capture doit tourner sur le PC du
-          joueur, tandis que l'API et le front doivent rester en ligne en permanence — un
-          découpage producteur/consommateur classique.
-        </p>
-
-        <ul className="grid gap-4 sm:grid-cols-3">
-          {SERVICES.map((service) => (
-            <li key={service.nom} className="space-y-2 rounded-xl border border-border p-4">
-              <service.icon className="size-5 text-muted" />
-              <p className="text-heading">{service.nom}</p>
-              <p className="text-xs text-muted">{service.lieu}</p>
-              <p className="text-body-sm text-muted">{service.detail}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="space-y-6">
-        <Reveal as="h2" className="text-section text-heading">Qualité &amp; déploiement</Reveal>
-        <p className="max-w-[60ch] text-body text-muted">
-          La partie fragile du projet n'est pas le code métier mais la capture : elle dépend
-          de l'affichage du jeu. Les tests et le suivi en production servent d'abord à voir
-          rapidement quand un relevé devient faux.
-        </p>
-
-        <ul className="grid gap-4 sm:grid-cols-2">
-          {QUALITE.map((bloc) => (
-            <li key={bloc.nom} className="space-y-2 rounded-xl border border-border p-4">
-              <bloc.icon className="size-5 text-muted" />
-              <p className="text-heading">{bloc.nom}</p>
-              <p className="text-body-sm text-muted">{bloc.detail}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-    </section>
+    </CaseStudy>
   );
 }
