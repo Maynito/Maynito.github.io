@@ -155,6 +155,7 @@ body { overflow-x: clip; }
 @utility bleed-x { margin-inline: calc(-1 * var(--bleed)); }
 @utility py-section { padding-block: var(--section-y); }
 @utility pt-section { padding-top: var(--section-y); }
+@utility pb-section { padding-bottom: var(--section-y); }
 @utility mt-section { margin-top: var(--section-y); }
 
 /* Conservé le temps de la migration : même largeur que .site */

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { FaGithub } from "react-icons/fa6";
 
 import Feature from "../components/Feature";
 import ProjectIndex from "../components/ProjectIndex";
@@ -64,7 +65,7 @@ export default function Home() {
 
         <div className="site grid-site relative">
           <p
-            className={`label col-span-full mb-[clamp(1.5rem,3vw,2.5rem)] flex flex-wrap justify-between gap-x-6 gap-y-2 ${entree(80)}`}
+            className={`label col-span-full mb-[clamp(1.5rem,3vw,2.5rem)] flex flex-wrap items-center gap-x-5 gap-y-2 ${entree(80)}`}
           >
             <span>Développeur full-stack</span>
             <span className="inline-flex items-center gap-2.5">
@@ -109,9 +110,10 @@ export default function Home() {
                 href={GITHUB}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="justify-self-center text-sm text-muted underline decoration-border-strong underline-offset-[5px] transition-colors hover:text-heading"
+                aria-label="GitHub"
+                className="inline-flex size-11 items-center justify-center justify-self-center rounded-full border border-border text-muted transition-colors duration-160 ease-out-quint hover:border-border-strong hover:bg-surface-hover hover:text-heading"
               >
-                GitHub ↗
+                <FaGithub className="size-5" aria-hidden="true" />
               </a>
             </div>
           </div>
