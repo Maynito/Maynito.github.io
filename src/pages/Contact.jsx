@@ -1,5 +1,6 @@
 import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa6";
 import { LuArrowUpRight } from "react-icons/lu";
+import DotGrid from "../components/DotGrid";
 
 const LIENS = [
   {
@@ -27,7 +28,9 @@ const LIENS = [
 
 export default function Contact() {
   return (
-    <div className="site grid-site py-section">
+    <div className="relative overflow-hidden">
+    <DotGrid />
+    <div className="site grid-site relative py-section">
       <p className="label col-span-full">Contact</p>
 
       <h1 className="col-span-full mt-5 text-cta text-heading lg:col-span-10">
@@ -51,6 +54,7 @@ export default function Contact() {
           </li>
         ))}
       </ul>
+    </div>
     </div>
   );
 }

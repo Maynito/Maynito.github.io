@@ -1,4 +1,4 @@
-import kamasCover from "../assets/kamas-hdv-merge.png";
+import kamasCover from "../assets/kamas-cover.jpg";
 
 // Source unique des projets. `layers` alimente le schéma d'architecture généré
 // (2 à 4 couches, 1 à 3 nœuds, libellés de 20 caractères maximum).
@@ -19,7 +19,7 @@ export const projects = [
     cover: {
       src: kamasCover,
       alt: "Tableau de bord Kamas : bénéfices et suivis d'achats",
-      caption: "Page Suivis : investissements et bénéfices",
+      caption: "Page Suivis : investissements en cours et bénéfices réalisés",
     },
     layers: [
       { label: "Collector", nodes: ["Capture écran", "Tesseract OCR"] },

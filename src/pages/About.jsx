@@ -1,4 +1,5 @@
 import Reveal from "../components/Reveal";
+import DotGrid from "../components/DotGrid";
 
 // TODO Lucas : vérifier les dates et l'intitulé exact du poste chez Capgemini.
 const PARCOURS = [
@@ -16,7 +17,9 @@ const OUTILS = [
 
 export default function About() {
   return (
-    <div className="site grid-site items-start py-section">
+    <div className="relative overflow-hidden">
+    <DotGrid />
+    <div className="site grid-site relative items-start py-section">
       <div className="col-span-full lg:col-start-3 lg:col-end-11">
         <p className="label">À propos</p>
         <h1 className="mt-4 text-h2 text-heading">Développeur full-stack</h1>
@@ -65,6 +68,7 @@ export default function About() {
           </dl>
         </Reveal>
       </div>
+    </div>
     </div>
   );
 }
