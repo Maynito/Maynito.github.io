@@ -177,7 +177,7 @@ export default function CaseStudy({ project, chapo, meta, sections, children }) 
           sections={sections}
           className="sticky top-[calc(var(--hdr)+32px)] col-span-2 hidden lg:block"
         />
-        <div className="prose-cs col-span-full grid grid-cols-subgrid lg:col-start-4 lg:col-end-13 [&>*]:col-span-full lg:[&>*]:col-span-7 lg:[&>.wide]:col-span-full lg:[&>.wide]:bleed-r max-lg:[&>.wide]:bleed-x">
+        <div className="prose-cs col-span-full grid grid-cols-subgrid lg:col-start-4 lg:col-end-13 [&>*]:col-span-full lg:[&>*]:col-span-7 lg:[&>.wide]:col-span-full">
           {children}
         </div>
       </div>

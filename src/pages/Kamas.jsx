@@ -88,7 +88,7 @@ export default function Kamas() {
         <img src={kamas2} alt="Tableau des crafts les plus rentables" className="w-full" />
       </Figure>
 
-      <Figure num={3} caption="Page Suivis : investissements en cours et bénéfices réalisés">
+      <Figure num={3} wide caption="Page Suivis : investissements en cours et bénéfices réalisés">
         <img src={kamas1} alt="Tableau de bord Kamas" className="w-full" />
       </Figure>
 
