@@ -53,10 +53,20 @@ function TableOfContents({ sections, className = "" }) {
   );
 }
 
-export function Figure({ children, caption, num, wide = false }) {
+/**
+ * `ratio` fixe le format du cadre pour que toutes les figures aient la même hauteur,
+ * quelle que soit la taille de la capture. "auto" laisse le contenu décider (schémas).
+ */
+export function Figure({ children, caption, num, wide = false, ratio = "16/10" }) {
   return (
     <figure className={wide ? "wide" : ""}>
-      <div className="overflow-hidden rounded-xl border border-border bg-surface">{children}</div>
+      <div
+        className={`overflow-hidden rounded-xl border border-border bg-surface [&>img]:size-full [&>img]:object-contain ${
+          ratio === "auto" ? "" : "aspect-[16/10]"
+        }`}
+      >
+        {children}
+      </div>
       {caption && (
         <figcaption className="mt-3 font-mono text-xs leading-[18px] text-muted">
           Fig. {num} — {caption}
