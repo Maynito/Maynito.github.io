@@ -14,11 +14,11 @@ const GITHUB = "https://github.com/Maynito";
 
 // Fiche technique du hero : uniquement des faits.
 const FICHE = [
-  ["Formation", "Master Génie Logiciel — Université de Bordeaux"],
+  ["Statut", "Disponible en octobre 2026"],
   ["Expérience", "6 mois chez Capgemini — application web de santé"],
+  ["Formation", "Master Génie Logiciel — Université de Bordeaux"],
   ["Front", "React · SolidJS · Angular · TypeScript · Tailwind"],
   ["Back", "Python · FastAPI · C# / .NET · Java · PostgreSQL"],
-  ["Statut", "Disponible en octobre 2026"],
 ];
 
 const PARCOURS = [
@@ -79,8 +79,8 @@ export default function Home() {
             <p
               className={`col-span-full max-w-[36em] text-lede text-text sm:col-span-6 lg:col-span-5 lg:row-start-1 ${entree(320)}`}
             >
-              Je construis des outils qui transforment des données brutes en décisions : OCR,
-              API, traitement distribué. Côté interface, je reste là où le back fait le travail.
+              Je construis les outils qui me manquent. Un problème que je rencontre au
+              quotidien au départ, un outil dont je me sers vraiment à l&apos;arrivée.
             </p>
 
             <dl
