@@ -35,7 +35,7 @@ const PARCOURS = [
   {
     date: "Octobre 2026",
     titre: "Disponible",
-    texte: "À la recherche d'un poste full-stack, plutôt orienté back et traitement de données.",
+    texte: "À la recherche d'un poste full-stack, en CDI, sur des produits web.",
     disponible: true,
   },
 ];
