@@ -61,7 +61,7 @@ export default function FedIA() {
         demandes).
       </p>
 
-      <Figure num={2} wide caption="[À compléter] légende de la capture">
+      <Figure num={2} wide ratio="auto" caption="[À compléter] légende de la capture">
         <Placeholder />
       </Figure>
 
@@ -75,7 +75,7 @@ export default function FedIA() {
         correspondent pas.
       </p>
 
-      <Figure num={3} wide caption="Architecture, générée depuis projects.js">
+      <Figure num={3} wide ratio="auto" caption="Architecture, générée depuis projects.js">
         <ArchSchematic project={projet} W={1000} H={400} />
       </Figure>
 
