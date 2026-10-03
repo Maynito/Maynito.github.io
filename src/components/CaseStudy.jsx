@@ -57,14 +57,11 @@ function TableOfContents({ sections, className = "" }) {
  * `ratio` fixe le format du cadre pour que toutes les figures aient la même hauteur,
  * quelle que soit la taille de la capture. "auto" laisse le contenu décider (schémas).
  */
-export function Figure({ children, caption, num, wide = false, ratio = "16/10" }) {
+export function Figure({ children, caption, num, wide = false }) {
   return (
     <figure className={wide ? "wide" : ""}>
-      <div
-        className={`overflow-hidden rounded-xl border border-border bg-surface [&>img]:size-full [&>img]:object-contain ${
-          ratio === "auto" ? "" : "aspect-[16/10]"
-        }`}
-      >
+      {/* Hauteur identique pour toutes les figures : seule la largeur change */}
+      <div className="grid h-[clamp(220px,30vw,420px)] place-items-center overflow-hidden rounded-xl border border-border bg-surface p-3 [&>*]:size-full [&>img]:object-contain">
         {children}
       </div>
       {caption && (
@@ -164,7 +161,7 @@ export default function CaseStudy({ project, chapo, meta, sections, children }) 
             <img
               src={project.cover.src}
               alt={project.cover.alt}
-              className="w-full rounded-xl border border-border object-cover object-left-top"
+              className="mx-auto block h-auto max-h-[min(58svh,520px)] w-auto max-w-full rounded-xl border border-border"
             />
           ) : (
             <ArchSchematic project={project} W={1200} H={440} />

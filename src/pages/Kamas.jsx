@@ -109,7 +109,7 @@ export default function Kamas() {
         touche jamais directement à la base.
       </p>
 
-      <Figure num={4} wide ratio="auto" caption="Architecture, générée depuis projects.js">
+      <Figure num={4} wide caption="Architecture, générée depuis projects.js">
         <ArchSchematic project={projet} W={1000} H={430} />
       </Figure>
 
