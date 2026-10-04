@@ -121,21 +121,22 @@ export default function Kamas() {
       <div className="mt-6 grid gap-4">
         <Adr
           titre="OCR plutôt que lecture mémoire"
-          contexte="Les prix ne sont accessibles que dans l'interface du jeu."
-          decision="Capturer l'écran et lire les prix par OCR, avec reconnaissance des icônes d'objets."
-          compromis="Plus fragile qu'une lecture mémoire et sensible aux mises à jour graphiques, mais sans modification du client du jeu."
+          contexte="Les prix ne sont lisibles que dans l'interface du jeu."
+          decision="Lire l'écran : OCR des prix, reconnaissance des icônes."
+          compromis="Sensible aux mises à jour graphiques, mais le client du jeu reste intact."
         />
+        {/* TODO Lucas : vérifier que le projet a bien démarré en application locale unique. */}
         <Adr
-          titre="Collector local, API hébergée"
-          contexte="Impossible de capturer une fenêtre de jeu depuis un serveur distant."
-          decision="Séparer la capture (poste du joueur) du stockage et du calcul (hébergés)."
-          compromis="Deux environnements à maintenir, mais l'historique reste disponible même quand le PC est éteint."
+          titre="Du monolithe local à trois services"
+          contexte="Tout tournait dans une seule application sur mon PC : rien n'était consultable quand il était éteint."
+          decision="Collector en local, API et base hébergées, site simple client de l'API."
+          compromis="Trois déploiements et un contrat d'API à tenir, mais chaque partie évolue seule."
         />
         <Adr
           titre="PostgreSQL plutôt que SQLite"
           contexte="Les relevés s'accumulent et plusieurs services les lisent en même temps."
-          decision="Passer sur PostgreSQL, avec migrations versionnées."
-          compromis="Un service de plus à opérer, compensé par les accès concurrents et les requêtes d'historique."
+          decision="PostgreSQL, avec migrations versionnées."
+          compromis="Un service de plus à opérer, pour des accès concurrents fiables."
         />
       </div>
 
