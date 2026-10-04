@@ -93,7 +93,8 @@ export function Figure({ children, caption, num, wide = false }) {
         <p className="mb-3 flex max-w-none items-baseline justify-end font-mono text-xs text-muted">
           <span className="whitespace-nowrap">Échap pour fermer</span>
         </p>
-        <div className="rounded-xl border border-border bg-surface p-2 [&>img]:max-h-[78svh] [&>img]:w-auto [&>img]:max-w-full [&>img]:object-contain [&>svg]:max-h-[78svh]">
+        {/* largeur fixe : images et schémas s'affichent à la même échelle */}
+        <div className="flex w-[min(1200px,92vw)] items-center justify-center rounded-xl border border-border bg-surface p-2 [&>div]:w-full [&>img]:max-h-[78svh] [&>img]:w-auto [&>img]:max-w-full [&>img]:object-contain [&>svg]:max-h-[78svh] [&>svg]:w-full">
           {children}
         </div>
         {caption && (
@@ -189,19 +190,22 @@ export default function CaseStudy({ project, chapo, meta, sections, children }) 
       </div>
 
       <figure className="mt-[clamp(3rem,6vw,5rem)] border-y border-border bg-surface py-[clamp(1.5rem,4vw,3rem)]">
+        {/* w-fit : la légende s'aligne sur le bord gauche du visuel, pas sur la grille */}
         <div className="site">
-          {project.cover ? (
-            <img
-              src={project.cover.src}
-              alt={project.cover.alt}
-              className="mx-auto block h-auto max-h-[min(58svh,520px)] w-auto max-w-full rounded-xl border border-border"
-            />
-          ) : (
-            <ArchSchematic project={project} W={1200} H={440} />
-          )}
-          <figcaption className="mt-3 font-mono text-xs text-muted">
-            Fig. 1 — {project.cover?.caption ?? "Architecture, générée depuis projects.js"}
-          </figcaption>
+          <div className="mx-auto w-fit max-w-full">
+            {project.cover ? (
+              <img
+                src={project.cover.src}
+                alt={project.cover.alt}
+                className="block h-auto max-h-[min(58svh,520px)] w-auto max-w-full rounded-xl border border-border"
+              />
+            ) : (
+              <ArchSchematic project={project} W={1200} H={440} />
+            )}
+            <figcaption className="mt-3 max-w-none font-mono text-xs text-muted">
+              Fig. 1 — {project.cover?.caption ?? "Architecture, générée depuis projects.js"}
+            </figcaption>
+          </div>
         </div>
       </figure>
 
