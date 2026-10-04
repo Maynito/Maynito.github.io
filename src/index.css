@@ -240,6 +240,21 @@ html.js [data-reveal]:not(.is-in) { opacity: 0; transform: translateY(16px); }
 @starting-style { .palette[open]::backdrop { background: transparent; } }
 @media (prefers-reduced-motion: reduce) { .palette, .palette[open] { transform: none; } }
 
+/* ---------- Visuel agrandi (figures des études de cas) ---------- */
+.lightbox {
+  margin: auto; max-width: min(1280px, 94vw); width: fit-content; padding: 0; border: 0;
+  background: transparent; color: var(--text);
+  opacity: 0; transform: scale(0.98) translateY(8px);
+  transition: opacity 120ms var(--ease-in), transform 120ms var(--ease-in),
+              overlay 120ms allow-discrete, display 120ms allow-discrete;
+}
+.lightbox[open] { opacity: 1; transform: none; transition-duration: 220ms; transition-timing-function: var(--ease-out-quint); }
+@starting-style { .lightbox[open] { opacity: 0; transform: scale(0.98) translateY(8px); } }
+.lightbox::backdrop { background: transparent; backdrop-filter: blur(2px); transition: background-color 120ms, overlay 120ms allow-discrete, display 120ms allow-discrete; }
+.lightbox[open]::backdrop { background: var(--backdrop); transition-duration: 180ms; }
+@starting-style { .lightbox[open]::backdrop { background: transparent; } }
+@media (prefers-reduced-motion: reduce) { .lightbox, .lightbox[open] { transform: none; } }
+
 /* ---------- Bascule de thème ---------- */
 ::view-transition-old(root), ::view-transition-new(root) {
   animation-duration: 240ms; animation-timing-function: var(--ease-in-out);

@@ -3,7 +3,7 @@
 // et supprime ce qui n'existe pas plutôt que de le laisser.
 import ArchSchematic from "../components/ArchSchematic";
 import CaseStudy, { Adr, Figure, QualityTable } from "../components/CaseStudy";
-import kamas1 from "../assets/kamas1.png";
+import kamasRenta from "../assets/kamas_renta.png";
 import kamas2 from "../assets/kamas2.png";
 import { bySlug } from "../data/projects";
 
@@ -84,12 +84,12 @@ export default function Kamas() {
         bénéfice réellement réalisé plutôt que le bénéfice théorique.
       </p>
 
-      <Figure num={2} wide caption="Crafts les plus rentables, triés par bénéfice mensuel estimé">
-        <img src={kamas2} alt="Tableau des crafts les plus rentables" className="w-full" />
+      <Figure num={2} wide caption="Dashboard : crafts rentables, familiers et suivis en cours, en un écran">
+        <img src={kamas2} alt="Dashboard Kamas : indicateurs de rentabilité et suivis en cours" className="w-full" />
       </Figure>
 
-      <Figure num={3} wide caption="Page Suivis : investissements en cours et bénéfices réalisés">
-        <img src={kamas1} alt="Tableau de bord Kamas" className="w-full" />
+      <Figure num={3} wide caption="Page Rentabilité : 955 recettes calculées, triées par bénéfice mensuel">
+        <img src={kamasRenta} alt="Page Rentabilité des crafts : coût, vente nette, marge et bénéfice mensuel par équipement" className="w-full" />
       </Figure>
 
       <h2 id="architecture">

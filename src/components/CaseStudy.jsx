@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { LuMaximize2 } from "react-icons/lu";
 
 import ArchSchematic from "./ArchSchematic";
 import DotGrid from "./DotGrid";
@@ -54,21 +55,51 @@ function TableOfContents({ sections, className = "" }) {
 }
 
 /**
- * `ratio` fixe le format du cadre pour que toutes les figures aient la même hauteur,
- * quelle que soit la taille de la capture. "auto" laisse le contenu décider (schémas).
+ * Toutes les figures ont la même hauteur : seule la largeur change.
+ * Un clic ouvre le visuel en grand dans une fenêtre modale.
  */
 export function Figure({ children, caption, num, wide = false }) {
+  const dialogRef = useRef(null);
+
   return (
     <figure className={wide ? "wide" : ""}>
-      {/* Hauteur identique pour toutes les figures : seule la largeur change */}
-      <div className="grid h-[clamp(220px,30vw,420px)] place-items-center overflow-hidden rounded-xl border border-border bg-surface p-3 [&>*]:size-full [&>img]:object-contain">
+      <button
+        type="button"
+        onClick={() => dialogRef.current?.showModal()}
+        aria-label={`Agrandir la figure ${num}`}
+        className="group relative grid h-[clamp(220px,30vw,420px)] w-full cursor-zoom-in place-items-center overflow-hidden rounded-xl border border-border bg-surface p-3 transition-colors duration-240 ease-out-quint hover:border-border-strong [&>*]:size-full [&>img]:object-contain"
+      >
         {children}
-      </div>
+        <span
+          aria-hidden
+          className="pointer-events-none absolute right-3 bottom-3 inline-flex items-center gap-1.5 rounded-full border border-border-strong bg-bg/85 px-3 py-1.5 font-mono text-xs text-heading opacity-0 backdrop-blur-sm transition duration-240 ease-out-quint group-hover:opacity-100 group-focus-visible:opacity-100"
+        >
+          <LuMaximize2 className="size-3.5" /> Agrandir
+        </span>
+      </button>
+
       {caption && (
         <figcaption className="mt-3 font-mono text-xs leading-[18px] text-muted">
           Fig. {num} — {caption}
         </figcaption>
       )}
+
+      <dialog
+        ref={dialogRef}
+        className="lightbox"
+        aria-label={caption ? `Figure ${num} : ${caption}` : `Figure ${num}`}
+        onClick={(event) => event.target === dialogRef.current && dialogRef.current.close()}
+      >
+        <div className="rounded-xl border border-border bg-surface p-2 [&>img]:max-h-[82svh] [&>img]:w-auto [&>img]:max-w-full [&>img]:object-contain [&>svg]:max-h-[82svh]">
+          {children}
+        </div>
+        {caption && (
+          <p className="mt-3 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 font-mono text-xs text-muted">
+            <span>Fig. {num} — {caption}</span>
+            <span className="whitespace-nowrap">Échap pour fermer</span>
+          </p>
+        )}
+      </dialog>
     </figure>
   );
 }
