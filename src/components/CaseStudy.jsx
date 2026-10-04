@@ -67,14 +67,14 @@ export function Figure({ children, caption, num, wide = false }) {
         type="button"
         onClick={() => dialogRef.current?.showModal()}
         aria-label={`Agrandir la figure ${num}`}
-        className="group relative grid h-[clamp(220px,30vw,420px)] w-full cursor-zoom-in place-items-center overflow-hidden rounded-xl border border-border bg-surface p-3 transition-colors duration-240 ease-out-quint hover:border-border-strong [&>*]:size-full [&>img]:object-contain"
+        className="group relative grid h-[clamp(220px,30vw,420px)] w-full cursor-zoom-in place-items-center overflow-hidden rounded-xl border border-border bg-surface p-3 transition-colors duration-240 ease-out-quint hover:border-border-strong [&>img]:size-full [&>img]:object-contain [&>svg]:size-full"
       >
         {children}
         <span
           aria-hidden
-          className="pointer-events-none absolute right-3 bottom-3 inline-flex items-center gap-1.5 rounded-full border border-border-strong bg-bg/85 px-3 py-1.5 font-mono text-xs text-heading opacity-0 backdrop-blur-sm transition duration-240 ease-out-quint group-hover:opacity-100 group-focus-visible:opacity-100"
+          className="pointer-events-none absolute right-4 bottom-4 grid size-8 place-items-center rounded-full border border-border-strong bg-bg/85 text-heading opacity-0 backdrop-blur-sm transition duration-240 ease-out-quint group-hover:opacity-100 group-focus-visible:opacity-100"
         >
-          <LuMaximize2 className="size-3.5" /> Agrandir
+          <LuMaximize2 className="size-3.5" />
         </span>
       </button>
 
@@ -90,13 +90,15 @@ export function Figure({ children, caption, num, wide = false }) {
         aria-label={caption ? `Figure ${num} : ${caption}` : `Figure ${num}`}
         onClick={(event) => event.target === dialogRef.current && dialogRef.current.close()}
       >
-        <div className="rounded-xl border border-border bg-surface p-2 [&>img]:max-h-[82svh] [&>img]:w-auto [&>img]:max-w-full [&>img]:object-contain [&>svg]:max-h-[82svh]">
+        <p className="mb-3 flex max-w-none items-baseline justify-end font-mono text-xs text-muted">
+          <span className="whitespace-nowrap">Échap pour fermer</span>
+        </p>
+        <div className="rounded-xl border border-border bg-surface p-2 [&>img]:max-h-[78svh] [&>img]:w-auto [&>img]:max-w-full [&>img]:object-contain [&>svg]:max-h-[78svh]">
           {children}
         </div>
         {caption && (
-          <p className="mt-3 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 font-mono text-xs text-muted">
-            <span>Fig. {num} — {caption}</span>
-            <span className="whitespace-nowrap">Échap pour fermer</span>
+          <p className="mt-3 max-w-none font-mono text-xs whitespace-nowrap text-muted">
+            Fig. {num} — {caption}
           </p>
         )}
       </dialog>

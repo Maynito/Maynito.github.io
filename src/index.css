@@ -249,6 +249,8 @@ html.js [data-reveal]:not(.is-in) { opacity: 0; transform: translateY(16px); }
               overlay 120ms allow-discrete, display 120ms allow-discrete;
 }
 .lightbox[open] { opacity: 1; transform: none; transition-duration: 220ms; transition-timing-function: var(--ease-out-quint); }
+/* la largeur vient du visuel : légende et rappel s'alignent dessus */
+.lightbox > * { width: 100%; }
 @starting-style { .lightbox[open] { opacity: 0; transform: scale(0.98) translateY(8px); } }
 .lightbox::backdrop { background: transparent; backdrop-filter: blur(2px); transition: background-color 120ms, overlay 120ms allow-discrete, display 120ms allow-discrete; }
 .lightbox[open]::backdrop { background: var(--backdrop); transition-duration: 180ms; }
