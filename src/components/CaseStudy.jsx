@@ -190,9 +190,10 @@ export default function CaseStudy({ project, chapo, meta, sections, children }) 
       </div>
 
       <figure className="mt-[clamp(3rem,6vw,5rem)] border-y border-border bg-surface py-[clamp(1.5rem,4vw,3rem)]">
-        {/* w-fit : la légende s'aligne sur le bord gauche du visuel, pas sur la grille */}
+        {/* Capture : w-fit pour que la légende s'aligne sur le visuel.
+            Schéma : pleine largeur, sinon il se replie sur sa variante mobile. */}
         <div className="site">
-          <div className="mx-auto w-fit max-w-full">
+          <div className={project.cover ? "mx-auto w-fit max-w-full" : "w-full"}>
             {project.cover ? (
               <img
                 src={project.cover.src}
