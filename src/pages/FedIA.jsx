@@ -1,7 +1,6 @@
-// TODO Lucas : les sections « Ce que j'ai fait », « Qualité & déploiement » et « Bilan »
-// attendent tes contributions réelles — je ne les connais pas. Le reste vient de ton rapport
-// de stage. Vérifie avant publication ce que tu as le droit de rendre public : j'ai retiré
-// les noms des personnes et je suis resté au niveau de ce qui est public sur labs.sogeti.com.
+// Volontairement généraliste : FedIA est un projet interne SogetiLabs. On décrit le rôle,
+// les compétences et les grands choix d'architecture, sans détailler l'implémentation,
+// le schéma de données, les services internes ni les environnements.
 import ArchSchematic from "../components/ArchSchematic";
 import CaseStudy, { Adr, Figure, Placeholder, QualityTable } from "../components/CaseStudy";
 import { bySlug } from "../data/projects";
@@ -18,26 +17,23 @@ const SECTIONS = [
 ];
 
 const META = [
-  ["Rôle", "Développeur full-stack"],
-  ["Contexte", "Stage chez Sogeti — initiative de recherche SogetiLabs"],
+  ["Rôle", "Développeur full-stack, back et front"],
+  ["Contexte", "Stage de fin d'études — SogetiLabs"],
   ["Durée", "6 mois"],
-  ["Stack", "C# · .NET · SolidJS · TypeScript · Azure DevOps"],
+  ["Stack", ".NET · SolidJS · PostgreSQL · Docker · Kubernetes · Azure DevOps"],
 ];
 
 const QUALITE = [
-  ["Tests", "[À compléter] types de tests écrits et outils utilisés."],
-  [
-    "Intégration continue",
-    "Pipelines Azure DevOps : le code, les versions et les déploiements sont suivis dans le même outil que les tâches du sprint.",
-  ],
-  ["Déploiement", "[À compléter] environnements et procédure de mise en production."],
+  ["Tests", "Tests automatisés côté back et côté front, exécutés à chaque intégration."],
+  ["Intégration continue", "Un pipeline par service, construit sur un gabarit commun à l'équipe."],
+  ["Déploiement", "Services conteneurisés, orchestrés par Kubernetes sur des environnements internes."],
 ];
 
 export default function FedIA() {
   return (
     <CaseStudy
       project={projet}
-      chapo="Une aide au diagnostic sur radiographies pulmonaires, entraînée sans jamais centraliser les données des patients."
+      chapo="Une aide au diagnostic sur radiographies pulmonaires, bâtie autour d'un modèle entraîné sans jamais centraliser les données des patients."
       meta={META}
       sections={SECTIONS}
     >
@@ -46,23 +42,20 @@ export default function FedIA() {
         Contexte
       </h2>
       <p>
-        Le diagnostic des pathologies pulmonaires à partir de radiographies repose presque
-        entièrement sur l&apos;expertise des radiologues. Les services d&apos;imagerie sont chargés,
-        la relecture d&apos;un examen est souvent nécessaire, et toutes les structures n&apos;ont pas
-        un radiologue spécialisé disponible en continu. L&apos;objectif de FedIA n&apos;est pas de
-        remplacer le médecin, mais de lui donner une première analyse rapide sur laquelle appuyer
-        son diagnostic.
+        Le diagnostic des pathologies pulmonaires repose presque entièrement sur l&apos;expertise des
+        radiologues. Les services d&apos;imagerie sont chargés, et toutes les structures n&apos;ont
+        pas un radiologue disponible en continu. FedIA ne remplace pas le médecin : l&apos;application
+        lui fournit une première analyse sur laquelle appuyer son diagnostic, et gère autour le suivi
+        des patients et les rapports.
       </p>
       <p>
         Le projet est une initiative de recherche appliquée de{" "}
         <a href="https://labs.sogeti.com/project/fedia/" target="_blank" rel="noopener noreferrer">
           SogetiLabs
         </a>
-        , encadrée par deux doctorantes sur les aspects scientifiques. L&apos;équipe est
-        majoritairement composée de consultants en intermission, donc à géométrie variable :
-        développeurs, Product Owners, testeurs et architectes s&apos;y relaient au fil des
-        disponibilités. Le travail suit un rythme agile, avec un point quotidien, des sprints de deux
-        semaines et une démonstration en fin de sprint devant toute l&apos;équipe.
+        , encadrée sur le plan scientifique par deux doctorantes. L&apos;équipe réunit des profils
+        variés et sa composition évolue au fil des disponibilités. Le travail suit un rythme agile :
+        point quotidien, sprints de deux semaines, démonstration en fin de sprint.
       </p>
 
       <h2 id="construit">
@@ -70,17 +63,24 @@ export default function FedIA() {
         Ce que j&apos;ai fait
       </h2>
       <p>
-        L&apos;application doit servir plusieurs profils d&apos;utilisateurs : les médecins et
-        radiologues, qui consultent les prédictions du modèle en appui de leur diagnostic ; les
-        secrétaires médicales, qui gèrent les dossiers et la logistique des examens ; et les
-        patients, qui suivent leurs résultats.
+        Je suis intervenu des deux côtés de l&apos;application. Côté back, j&apos;ai fait évoluer le
+        modèle de données au fil des besoins métier, développé la génération de rapports destinés aux
+        médecins, avec une option d&apos;anonymisation, et travaillé sur la gestion des comptes et
+        des notifications.
       </p>
       <p>
-        [À compléter] Mes contributions concrètes : écrans développés côté SolidJS, services .NET,
-        et sujets transverses (tests, revues de code, suivi des tâches dans Azure DevOps).
+        Côté front, j&apos;ai complété l&apos;affichage des prédictions et de leur historique, et
+        construit une page de paramètres réservée à certains rôles, avant d&apos;en ouvrir la
+        consultation à d&apos;autres profils d&apos;utilisateurs.
+      </p>
+      <p>
+        Mon sujet le plus autonome a été l&apos;intégration d&apos;un annuaire public de
+        professionnels de santé, menée de bout en bout : comprendre une API externe, valider son
+        comportement réel par des appels de test avant d&apos;écrire la moindre ligne, puis concevoir
+        et exposer le service correspondant.
       </p>
 
-      <Figure num={2} wide caption="[À compléter] légende de la capture">
+      <Figure num={2} wide caption="Capture à venir">
         <Placeholder />
       </Figure>
 
@@ -89,17 +89,16 @@ export default function FedIA() {
         Architecture
       </h2>
       <p>
-        Un modèle performant a besoin de beaucoup de données, variées. Or les données de santé sont
-        protégées par le secret médical et par le RGPD : les réunir sur un serveur unique n&apos;est
-        envisageable ni réglementairement, ni éthiquement.
+        L&apos;application est découpée en services indépendants : une interface web en application
+        monopage, une API REST, et un service dédié à l&apos;analyse des radiographies. Chacun est
+        développé, testé et déployé séparément, et communique avec les autres par des interfaces
+        bien définies.
       </p>
       <p>
-        L&apos;architecture repose donc sur l&apos;<strong className="font-medium text-heading">apprentissage fédéré</strong> :
-        le modèle est entraîné chez chaque établissement, sur ses propres données, et seuls les{" "}
-        <strong className="font-medium text-heading">paramètres</strong> du modèle circulent pour
-        être agrégés. Aucune radiographie ne sort de son environnement d&apos;origine. Côté
-        application, le front en SolidJS consomme une API .NET, qui sert les prédictions et la
-        gestion des dossiers.
+        Le principe fondateur du projet est l&apos;apprentissage fédéré : chaque établissement
+        entraîne le modèle sur ses propres données, et seuls les paramètres du modèle circulent. Mon
+        périmètre portait sur l&apos;application qui expose et consomme ce modèle, pas sur
+        l&apos;entraînement lui-même.
       </p>
 
       <Figure num={3} wide caption="Architecture, générée depuis projects.js">
@@ -113,15 +112,15 @@ export default function FedIA() {
       <div className="mt-6 grid gap-4">
         <Adr
           titre="Apprentissage fédéré plutôt que centralisation"
-          contexte="Les données de santé relèvent du secret médical et du RGPD : impossible de les regrouper."
-          decision="Entraîner le modèle localement dans chaque établissement et ne faire circuler que ses paramètres."
-          compromis="Entraînement plus complexe à orchestrer, mais aucune donnée patient ne quitte son établissement."
+          contexte="Les données de santé relèvent du secret médical et du RGPD : les réunir sur un serveur n'est ni légal, ni éthique."
+          decision="Entraîner le modèle localement et ne faire circuler que ses paramètres."
+          compromis="Entraînement plus complexe à orchestrer, mais aucune donnée patient ne sort de son établissement."
         />
         <Adr
-          titre="Une aide à la décision, pas un diagnostic"
-          contexte="La responsabilité du diagnostic reste au médecin, et l'outil s'insère dans un parcours de soin existant."
-          decision="Présenter la prédiction comme un appui, consultable aux côtés du dossier patient."
-          compromis="Moins spectaculaire qu'une annonce automatique, mais acceptable pour les professionnels de santé."
+          titre="Un back en couches, avec des DTO"
+          contexte="Plusieurs clients consomment l'API et le modèle de données évolue encore."
+          decision="Séparer exposition, métier et persistance, et ne jamais exposer les entités directement."
+          compromis="Plus de code par route, mais l'implémentation interne évolue sans casser les clients."
         />
       </div>
 
@@ -130,9 +129,9 @@ export default function FedIA() {
         Qualité &amp; déploiement
       </h2>
       <p>
-        Le projet s&apos;appuie sur Azure DevOps pour le suivi des tâches, la gestion des versions et
-        les pipelines d&apos;intégration et de déploiement, sur des serveurs distants fournis par
-        l&apos;entreprise.
+        La couverture de tests est inégale selon les services : correcte côté back, plus légère
+        ailleurs. C&apos;est une limite que j&apos;ai identifiée et documentée plutôt que de la
+        passer sous silence.
       </p>
       <QualityTable rows={QUALITE} />
 
@@ -144,15 +143,28 @@ export default function FedIA() {
         <div>
           <p className="label mb-3">Ce que j&apos;en retire</p>
           <ul className="list-disc space-y-2 pl-5 text-sm leading-[22px] text-text">
-            <li>Travailler sur un projet existant, dans une équipe dont la composition change.</li>
-            <li>[À compléter] ce que la contrainte réglementaire t&apos;a appris côté conception.</li>
+            <li>
+              Travailler sur une base de code partagée : respecter des conventions plutôt que
+              réinventer les siennes.
+            </li>
+            <li>
+              Coordonner des profils très différents, et faire valider ses choix techniques par une
+              équipe plutôt que de les prendre seul.
+            </li>
+            <li>
+              Un choix imparfait n&apos;est pas un problème en soi : ce qui compte, c&apos;est de
+              l&apos;identifier et de le corriger.
+            </li>
           </ul>
         </div>
         <div>
           <p className="label mb-3">Ce que je referais autrement</p>
           <ul className="list-disc space-y-2 pl-5 text-sm leading-[22px] text-text">
-            <li>[À compléter]</li>
-            <li>[À compléter]</li>
+            <li>
+              Formaliser les besoins avant de modéliser : plusieurs allers-retours auraient été
+              évités.
+            </li>
+            <li>Rééquilibrer l&apos;effort de test entre les services dès le départ.</li>
           </ul>
         </div>
       </div>
