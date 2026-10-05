@@ -2,7 +2,7 @@
 // les compétences et les grands choix d'architecture, sans détailler l'implémentation,
 // le schéma de données, les services internes ni les environnements.
 import ArchSchematic from "../components/ArchSchematic";
-import CaseStudy, { Adr, Figure, Placeholder, QualityTable } from "../components/CaseStudy";
+import CaseStudy, { Adr, Figure, QualityTable } from "../components/CaseStudy";
 import { bySlug } from "../data/projects";
 
 const projet = bySlug("fedia");
@@ -80,9 +80,6 @@ export default function FedIA() {
         et exposer le service correspondant.
       </p>
 
-      <Figure num={2} wide caption="Capture à venir">
-        <Placeholder />
-      </Figure>
 
       <h2 id="architecture">
         <small className="label mb-2 block">03</small>
@@ -101,7 +98,7 @@ export default function FedIA() {
         l&apos;entraînement lui-même.
       </p>
 
-      <Figure num={3} wide caption="Architecture, générée depuis projects.js">
+      <Figure num={2} wide caption="Architecture, générée depuis projects.js">
         <ArchSchematic project={projet} W={1000} H={400} />
       </Figure>
 

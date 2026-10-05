@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Documents personnels (rapport de stage, CV...)
+docs/*.pdf
