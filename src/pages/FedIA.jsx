@@ -116,12 +116,6 @@ export default function FedIA() {
           decision="Entraîner le modèle localement et ne faire circuler que ses paramètres."
           compromis="Entraînement plus complexe à orchestrer, mais aucune donnée patient ne sort de son établissement."
         />
-        <Adr
-          titre="Un back en couches, avec des DTO"
-          contexte="Plusieurs clients consomment l'API et le modèle de données évolue encore."
-          decision="Séparer exposition, métier et persistance, et ne jamais exposer les entités directement."
-          compromis="Plus de code par route, mais l'implémentation interne évolue sans casser les clients."
-        />
       </div>
 
       <h2 id="qualite">
