@@ -109,7 +109,7 @@ export function Figure({ children, caption, num, wide = false }) {
 
 export function Placeholder({ label = "Capture à venir" }) {
   return (
-    <div className="grid aspect-[16/10] place-items-center bg-[repeating-linear-gradient(135deg,var(--border)_0,var(--border)_1px,transparent_1px,transparent_14px)]">
+    <div className="grid size-full place-items-center rounded-lg bg-[repeating-linear-gradient(135deg,var(--border)_0,var(--border)_1px,transparent_1px,transparent_14px)]">
       <span className="label">{label}</span>
     </div>
   );
